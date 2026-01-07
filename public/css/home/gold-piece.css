@@ -1,0 +1,24 @@
+@keyframes rotate3d {
+    0% {
+        transform: rotateY(0deg) rotateX(15deg);
+    }
+    100% {
+        transform: rotateY(360deg) rotateX(15deg);
+    }
+}
+
+.gold-coin {
+    animation: rotate3d 4s linear infinite;
+    transform-style: preserve-3d;
+}
+
+.coin-shine {
+    background: linear-gradient(135deg,
+        #FFD700 0%,
+        #FFA500 20%,
+        #FFD700 40%,
+        #FFED4E 50%,
+        #FFD700 60%,
+        #FFA500 80%,
+        #FFD700 100%);
+}

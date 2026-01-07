@@ -1,0 +1,149 @@
+/* Tablet Responsive */
+@media (max-width: 768px) {
+  html {
+    font-size: 14px;
+  }
+
+  .coins-grid,
+  .cards-grid {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 16px;
+  }
+
+  .feature-card {
+    padding: 24px;
+  }
+
+  .input-section {
+    padding: 24px;
+  }
+
+  .input-wrapper {
+    max-width: 100%;
+  }
+
+  .gold-card,
+  .currency-card {
+    min-width: 100%;
+    max-width: 100%;
+  }
+
+  .card-info-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+}
+
+/* Mobile Responsive */
+@media (max-width: 480px) {
+  html {
+    font-size: 13px;
+  }
+
+  header {
+    grid-template-columns: 1fr;
+    padding: 16px;
+  }
+
+  main {
+    margin-top: 12px;
+    space: 12px;
+  }
+
+  .coin-container {
+    max-width: 200px;
+  }
+
+  .coin-inner {
+    width: 200px;
+    height: 200px;
+  }
+
+  .coin-center {
+    width: 120px;
+    height: 120px;
+  }
+
+  .coin-center svg {
+    width: 48px;
+    height: 48px;
+  }
+
+  /* Cards Grid */
+  .cards-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .gold-card,
+  .currency-card {
+    min-width: 100%;
+    padding: 16px;
+  }
+
+  .card-header {
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 12px;
+  }
+
+  .card-price-section {
+    text-align: right;
+  }
+
+  .card-info-grid {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
+  .feature-card {
+    padding: 16px;
+  }
+
+  .feature-icon div {
+    width: 64px;
+    height: 64px;
+  }
+
+  .feature-icon svg {
+    width: 32px;
+    height: 32px;
+  }
+
+  .feature-title {
+    font-size: 16px;
+  }
+
+  .feature-description {
+    font-size: 13px;
+  }
+
+  .input-section {
+    padding: 16px;
+  }
+
+  .form-input,
+  .input-label {
+    font-size: 13px;
+  }
+
+  footer {
+    padding: 24px 16px;
+  }
+}
+
+/* Extra Small Mobile */
+@media (max-width: 320px) {
+  .coins-grid,
+  .cards-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .card-title-gold {
+    font-size: 14px;
+  }
+
+  .card-price {
+    font-size: 13px;
+  }
+}
