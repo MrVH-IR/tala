@@ -11,20 +11,17 @@
                 <div class="flex flex-wrap">
                     <div class="w-6/12">
                         <a class="inline-block p-4 px-0 mr-0 text-sm font-bold text-left text-white uppercase md:block md:pb-2 text-blueGray-600 whitespace-nowrap"
-                            href="../../index.html">
+                            href="#">
                             Goldina
                         </a>
                     </div>
                 </div>
             </div>
-            <!-- Divider -->
             <hr class="my-4 md:min-w-full" />
-            <!-- Navigation -->
 
             <ul class="flex flex-col list-none md:flex-col md:min-w-full">
                 <li class="items-center">
                     <x-nav-link-a :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                        <!-- Dashboard icon -->
                         <svg xmlns="http://www.w3.org/2000/svg"
                             class="w-5 h-5 transition-all duration-300 text-slate-400 group-hover:text-white group-hover:scale-110"
                             fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -39,12 +36,9 @@
                 </li>
 
                 <li x-data="{ open: false }" class="items-center">
-                    <!-- لینک اصلی با دو عملکرد -->
                     <div class="flex items-center justify-between group">
-                        <!-- متن کلیک برای رفتن به روت -->
                         <a href="{{ route('dashboard.setting') }}"
                             class="flex items-center flex-1 gap-3 px-4 py-3 text-sm font-medium transition-all duration-300 ease-out rounded-xl text-slate-300 hover:bg-gradient-to-r hover:from-pink-500 hover:to-rose-500 hover:text-white hover:shadow-lg hover:shadow-pink-500/30">
-                            <!-- آیکون چرخ‌دنده -->
                             <svg xmlns="http://www.w3.org/2000/svg"
                                 class="w-5 h-5 transition-all duration-300 group-hover:text-white" fill="none"
                                 viewBox="0 0 24 24" stroke="currentColor">
@@ -55,7 +49,6 @@
                             <span>تنظیمات</span>
                         </a>
 
-                        <!-- فلش کلیک برای باز/بسته کردن زیرمنو -->
                         <button @click="open = !open"
                             class="px-3 py-3 text-gray-400 transition-transform duration-300 hover:text-white"
                             :class="{ 'rotate-90': open }">
@@ -67,7 +60,6 @@
                         </button>
                     </div>
 
-                    <!-- زیرمنو -->
                     <ul x-show="open" x-transition class="pl-6 mt-2 space-y-1" @click.away="open = false">
                         <li>
                             <x-nav-link-a :href="route('dashboard.setting.profile')" :active="request()->routeIs('dashboard.setting.profile')"

@@ -20,11 +20,9 @@
         @yield('head')
     </head>
         <body class="font-sans antialiased">
-            <!-- wrapper اصلی صفحه -->
         <div class="min-h-screen bg-gray-50 dark:bg-black text-black/50 dark:text-white/50">
             <div class="relative w-full px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
 
-            <!-- header -->
                 <header class="flex items-center justify-between py-10">
                     @include('livewire.layout.home.header')
                     @yield('header')

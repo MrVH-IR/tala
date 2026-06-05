@@ -5,10 +5,7 @@
             <p class="card-subtitle">{{ $item['name_en'] }}</p>
         </div>
         <div class="card-price-section">
-            @php
-                $price = $item['price'] * 1.007;
-            @endphp
-            <p class="card-price">{{ number_format($price) }} <span class="currency-unit">تومان</span></p>
+            <p class="card-price">{{ number_format($item['price']) }} <span class="currency-unit">تومان</span></p>
             <p class="price-change positive">{{ $item['unit'] }}</p>
         </div>
     </div>

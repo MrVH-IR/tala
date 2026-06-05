@@ -1,19 +1,22 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="text-xl font-semibold leading-tight text-right text-gray-800 dark:text-gray-200">
-            {{ __('پنل') }}
+            {{ __('پنل کاربری') }}
         </h2>
     </x-slot>
 
-    <div id="login-alert" class="py-12 transition-opacity duration-700">
-        <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
-            <div class="overflow-hidden bg-white shadow-sm dark:bg-gray-800 sm:rounded-lg">
-                <div class="p-6 font-bold text-right text-gray-900 dark:text-gray-100">
-                    {{ '😊 خوش آمدید' }}
+    @if(session('welcome_message'))
+        <div id="login-alert" class="py-12 transition-opacity duration-700">
+            <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
+                <div class="overflow-hidden bg-white shadow-sm dark:bg-gray-800 sm:rounded-lg">
+                    <div class="p-6 font-bold text-right text-gray-900 dark:text-gray-100">
+                        {{ '😊 خوش آمدید' }}
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+    @endif
+
 
     <div class="py-5">
         <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">

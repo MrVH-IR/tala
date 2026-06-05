@@ -14,15 +14,17 @@ class HomeComponent extends Component
     public float $weight = 0;
     public float $gold18Price = 0;
 
-    public function calcGold(GoldApi $goldApi)
+    public function calcGold(GoldApi $goldApi): void
     {
-        $response = $goldApi();
-        $goldList = $response->getData(true)['gold'] ?? [];
+        $goldList = $goldApi()
+            ->getData(true)['gold'] ?? [];
 
         $gold18 = collect($goldList)
             ->firstWhere('symbol', 'IR_GOLD_18K');
 
-        $this->gold18Price = $gold18['price'] * 1.007 ?? 0;
+        $this->gold18Price = (int) (
+            ($gold18['price'] ?? 0) * 1.007
+        );
     }
 
     public function updatedAmount($value)

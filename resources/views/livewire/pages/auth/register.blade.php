@@ -41,14 +41,14 @@ new #[Layout('layouts.guest')] class extends Component
         <!-- Name -->
         <div>
             <x-input-label for="name" :value="__('نام')" />
-            <x-text-input wire:model="name" id="name" class="block w-full mt-1" type="text" name="name" required autofocus autocomplete="name" />
+            <x-text-input wire:model.live="name" id="name" class="block w-full mt-1" type="text" name="name" required autofocus autocomplete="name" />
             <x-input-error :messages="$errors->get('name')" class="mt-2" />
         </div>
 
         <!-- Email Address -->
         <div class="mt-4">
             <x-input-label for="email" :value="__('ایمیل')" />
-            <x-text-input wire:model="email" id="email" class="block w-full mt-1" type="email" name="email" required autocomplete="username" />
+            <x-text-input wire:model.live="email" id="email" class="block w-full mt-1" type="email" name="email" required autocomplete="username" />
             <x-input-error :messages="$errors->get('email')" class="mt-2" />
         </div>
 
@@ -56,7 +56,7 @@ new #[Layout('layouts.guest')] class extends Component
         <div class="mt-4">
             <x-input-label for="password" :value="__('پسورد')" />
 
-            <x-text-input wire:model="password" id="password" class="block w-full mt-1"
+            <x-text-input wire:model.live="password" id="password" class="block w-full mt-1"
                             type="password"
                             name="password"
                             required autocomplete="new-password" />
@@ -68,7 +68,7 @@ new #[Layout('layouts.guest')] class extends Component
         <div class="mt-4">
             <x-input-label for="password_confirmation" :value="__('تایید پسورد')" />
 
-            <x-text-input wire:model="password_confirmation" id="password_confirmation" class="block w-full mt-1"
+            <x-text-input wire:model.live="password_confirmation" id="password_confirmation" class="block w-full mt-1"
                             type="password"
                             name="password_confirmation" required autocomplete="new-password" />
 

@@ -39,6 +39,7 @@ class LoginForm extends Form
         }
 
         RateLimiter::clear($this->throttleKey());
+        session()->flash('welcome_message' , true);
     }
 
     /**

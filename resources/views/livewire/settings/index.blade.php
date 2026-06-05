@@ -1,8 +1,12 @@
 <x-app-layout>
+    <x-slot name="header">
+        <h2 class="text-xl font-semibold leading-tight text-right text-gray-800 dark:text-gray-200">
+            {{ __('پنل تنظیمات') }}
+        </h2>
+    </x-slot>
     <div class="flex items-center justify-center min-h-[80vh]">
         <div class="grid grid-cols-1 gap-8 md:grid-cols-2">
 
-            <!-- کارت انتخاب نام و موبایل -->
             <a href="{{ route('dashboard.setting.profile') }}"
                 class="block p-8 text-center transition-all duration-300 bg-gray-900 shadow-lg group rounded-xl hover:bg-gradient-to-r hover:from-pink-500 hover:to-rose-500 hover:text-white hover:shadow-pink-500/30">
                 <svg xmlns="http://www.w3.org/2000/svg"
@@ -15,7 +19,6 @@
                 <p class="mt-2 text-gray-400 group-hover:text-white">تغییر نام و شماره همراه</p>
             </a>
 
-            <!-- کارت انتخاب پسورد -->
             <a href="{{ route('dashboard.setting.password') }}"
                 class="block p-8 text-center transition-all duration-300 bg-gray-900 shadow-lg group rounded-xl hover:bg-gradient-to-r hover:from-pink-500 hover:to-rose-500 hover:text-white hover:shadow-pink-500/30">
                 <svg xmlns="http://www.w3.org/2000/svg"
