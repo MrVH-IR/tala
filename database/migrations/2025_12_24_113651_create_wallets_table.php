@@ -14,12 +14,12 @@ return new class extends Migration
         Schema::create('wallets', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('asset_id')->constrained()->cascadeOnDelete();
 
-            $table->enum('type', ['GOLD', 'MONEY']);
             $table->decimal('balance', 18, 6)->default(0);
 
             $table->timestamps();
-            $table->unique(['user_id', 'type']);
+            $table->unique(['user_id', 'asset_id']);
         });
     }
 

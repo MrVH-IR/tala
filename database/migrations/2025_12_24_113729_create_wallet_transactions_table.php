@@ -17,18 +17,14 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
 
             $table->enum('type', [
-                'CREDIT',   // افزایش
-                'DEBIT'     // کاهش
+                'CREDIT',   // Increase
+                'DEBIT'     // Decrease
             ]);
 
             $table->decimal('amount', 18, 6);
 
             $table->string('source_type')->nullable();
-            // gold_order, manual_adjustment, refund, etc
-
             $table->unsignedBigInteger('source_id')->nullable();
-            // id مربوط به gold_orders یا هرچی
-
             $table->text('description')->nullable();
 
             $table->foreignId('created_by')->nullable()->references('id')->on('admins');

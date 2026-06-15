@@ -11,14 +11,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('gold_orders', function (Blueprint $table) {
+        Schema::create('orders', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('asset_id')->constrained()->cascadeOnDelete();
 
             $table->enum('type', ['BUY', 'SELL']);
-            $table->decimal('gold_amount', 14, 3);
-            $table->decimal('gold_price', 14, 3);
-            $table->decimal('money_amount', 14, 3);
+            
+            $table->decimal('amount', 14, 3)->comment('Quantity of asset');
+            $table->decimal('price', 14, 3)->comment('Price per unit');
+            $table->decimal('total_money', 14, 3)->comment('Total fiat amount');
         
             $table->enum('status', [
                 'REQUESTED',
@@ -40,6 +42,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('gold_orders');
+        Schema::dropIfExists('orders');
     }
 };

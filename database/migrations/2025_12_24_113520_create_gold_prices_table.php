@@ -11,9 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('gold_prices', function (Blueprint $table) {
+        Schema::create('market_prices', function (Blueprint $table) {
             $table->id();
-            $table->decimal('price', 14, 3)->comment('Ounce price');
+            $table->foreignId('asset_id')->constrained()->cascadeOnDelete();
+            $table->decimal('price', 14, 3);
             $table->timestamp('priced_at');
             $table->timestamps();
         });
@@ -24,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('gold_prices');
+        Schema::dropIfExists('market_prices');
     }
 };

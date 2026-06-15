@@ -38,25 +38,27 @@ new #[Layout('layouts.guest')] class extends Component
         {{ __('This is a secure area of the application. Please confirm your password before continuing.') }}
     </div>
 
-    <form wire:submit="confirmPassword">
-        <!-- Password -->
-        <div>
-            <x-input-label for="password" :value="__('Password')" />
+    <div>
+        <form wire:submit="confirmPassword" class="space-y-6">
+            <div class="space-y-2 text-right">
+                <label for="password" class="text-sm font-medium text-gray-600 dark:text-gray-400 block">{{ __('رمز عبور خود را وارد کنید') }}</label>
+                <input
+                    wire:model.live="password"
+                    id="password"
+                    type="password"
+                    name="password"
+                    required
+                    autocomplete="current-password"
+                    class="w-full px-4 py-3 rounded-xl border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-yellow-500 focus:border-transparent outline-none transition-all text-right"
+                />
+                <x-input-error :messages="$errors->get('password')" class="mt-1" />
+            </div>
 
-            <x-text-input wire:model.live="password"
-                          id="password"
-                          class="block w-full mt-1"
-                          type="password"
-                          name="password"
-                          required autocomplete="current-password" />
-
-            <x-input-error :messages="$errors->get('password')" class="mt-2" />
-        </div>
-
-        <div class="flex justify-end mt-4">
-            <x-primary-button>
-                {{ __('Confirm') }}
-            </x-primary-button>
-        </div>
-    </form>
+            <div class="pt-2">
+                <button type="submit" class="w-full py-3 px-4 bg-yellow-500 hover:bg-yellow-600 text-white font-bold rounded-xl transition-all shadow-lg shadow-yellow-500/20 active:scale-[0.98]">
+                    {{ __('تایید رمز عبور') }}
+                </button>
+            </div>
+        </form>
+    </div>
 </div>

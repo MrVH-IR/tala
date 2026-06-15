@@ -1,16 +1,17 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Livewire\HomeComponent;
 use App\Livewire\{
-    Buy\BuyComponent,
+    HomeComponent,
+    DashboardComponent,
     Settings\Profile,
-    Settings\Password
+    Settings\Password,
+    Buy\BuyComponent
 };
 
 Route::get('/', HomeComponent::class)->name('home');
 
-Route::view('dashboard', 'dashboard')
+Route::get('/dashboard', DashboardComponent::class)
     ->middleware(['auth', 'verified'])
     ->name('dashboard');
 

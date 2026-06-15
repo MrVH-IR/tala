@@ -1,129 +1,73 @@
-<nav
-    class="relative z-10 flex flex-wrap items-center justify-between px-6 py-4 font-sans bg-white shadow-xl dark:bg-gray-900 md:left-0 md:block md:fixed md:top-0 md:bottom-0 md:overflow-y-auto md:flex-row md:flex-nowrap md:overflow-hidden md:w-64">
-    <div
-        class="flex flex-wrap items-center justify-between w-full px-0 mx-auto md:flex-col md:items-stretch md:min-h-full md:flex-nowrap">
-        <a href="{{ route('home') }}">
-            <img id="logo" class="max-w-[50px]" src="{{ asset('images/logos/nobg-g-logo.png') }}" alt="Goldina Logo" />
+<nav class="relative z-30 flex flex-col w-64 h-screen bg-white dark:bg-gray-900 border-l border-gray-200 dark:border-gray-800 transition-all duration-300 overflow-y-auto md:fixed md:top-0 md:bottom-0 md:right-0">
+    <!-- Logo Section -->
+    <div class="flex items-center justify-center py-8 border-b border-gray-100 dark:border-gray-800">
+        <a href="{{ route('home') }}" class="transition-transform duration-300 hover:scale-110">
+            <img id="logo" class="w-12" src="{{ asset('images/logos/nobg-g-logo.png') }}" alt="Goldina Logo" />
         </a>
-        <div class="absolute top-0 left-0 right-0 z-40 items-center flex-1 hidden h-auto overflow-x-hidden overflow-y-auto rounded shadow md:flex md:flex-col md:items-stretch md:opacity-100 md:relative md:mt-4 md:shadow-none"
-            id="example-collapse-sidebar">
-            <div class="block pb-4 mb-4 border-b border-solid md:min-w-full md:hidden border-blueGray-200">
-                <div class="flex flex-wrap">
-                    <div class="w-6/12">
-                        <a class="inline-block p-4 px-0 mr-0 text-sm font-bold text-left text-white uppercase md:block md:pb-2 text-blueGray-600 whitespace-nowrap"
-                            href="#">
-                            Goldina
-                        </a>
-                    </div>
-                </div>
-            </div>
-            <hr class="my-4 md:min-w-full" />
+    </div>
 
-            <ul class="flex flex-col list-none md:flex-col md:min-w-full">
-                <li class="items-center">
-                    <x-nav-link-a :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                        <svg xmlns="http://www.w3.org/2000/svg"
-                            class="w-5 h-5 transition-all duration-300 text-slate-400 group-hover:text-white group-hover:scale-110"
-                            fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
-                                d="M3 3h7v7H3V3zm11 0h7v7h-7V3zM3 14h7v7H3v-7zm11 0h7v7h-7v-7z" />
+    <!-- Navigation Menu -->
+    <div class="flex-1 px-4 py-6 space-y-8">
+        <div>
+            <p class="px-4 mb-4 text-[10px] font-bold text-gray-400 uppercase tracking-wider">منوی اصلی</p>
+            <ul class="space-y-2">
+                <li>
+                    <x-nav-link-a :href="route('dashboard')" :active="request()->routeIs('dashboard')" class="flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium transition-all group">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-gray-400 group-hover:text-yellow-500 transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m0-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
                         </svg>
-
-                        <span class="tracking-tight">
-                            پنل کاربری
-                        </span>
+                        <span>داشبورد</span>
                     </x-nav-link-a>
                 </li>
-
-                <li x-data="{ open: false }" class="items-center">
-                    <div class="flex items-center justify-between group">
-                        <a href="{{ route('dashboard.setting') }}"
-                            class="flex items-center flex-1 gap-3 px-4 py-3 text-sm font-medium transition-all duration-300 ease-out rounded-xl text-slate-300 hover:bg-gradient-to-r hover:from-pink-500 hover:to-rose-500 hover:text-white hover:shadow-lg hover:shadow-pink-500/30">
-                            <svg xmlns="http://www.w3.org/2000/svg"
-                                class="w-5 h-5 transition-all duration-300 group-hover:text-white" fill="none"
-                                viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
-                                    d="M11.983 2.25c-.727 0-1.321.594-1.321 1.321v.905a7.51 7.51 0 00-1.74.72l-.64-.64a1.321 1.321 0 00-1.868 0l-.707.707a1.321 1.321 0 000 1.868l.64.64a7.51 7.51 0 00-.72 1.74h-.905c-.727 0-1.321.594-1.321 1.321v1c0 .727.594 1.321 1.321 1.321h.905c.18.63.43 1.216.72 1.74l-.64.64a1.321 1.321 0 000 1.868l.707.707a1.321 1.321 0 001.868 0l.64-.64c.524.29 1.11.54 1.74.72v.905c0 .727.594 1.321 1.321 1.321h1c.727 0 1.321-.594 1.321-1.321v-.905a7.51 7.51 0 001.74-.72l.64.64a1.321 1.321 0 001.868 0l.707-.707a1.321 1.321 0 000-1.868l-.64-.64c.29-.524.54-1.11.72-1.74h.905c.727 0 1.321-.594 1.321-1.321v-1c0-.727-.594-1.321-1.321-1.321h-.905a7.51 7.51 0 00-.72-1.74l.64-.64a1.321 1.321 0 000-1.868l-.707-.707a1.321 1.321 0 00-1.868 0l-.64.64a7.51 7.51 0 00-1.74-.72v-.905c0-.727-.594-1.321-1.321-1.321h-1z" />
-                            </svg>
-
-                            <span>تنظیمات</span>
-                        </a>
-
-                        <button @click="open = !open"
-                            class="px-3 py-3 text-gray-400 transition-transform duration-300 hover:text-white"
-                            :class="{ 'rotate-90': open }">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24"
-                                stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M9 5l7 7-7 7" />
-                            </svg>
-                        </button>
-                    </div>
-
-                    <ul x-show="open" x-transition class="pl-6 mt-2 space-y-1" @click.away="open = false">
-                        <li>
-                            <x-nav-link-a :href="route('dashboard.setting.profile')" :active="request()->routeIs('dashboard.setting.profile')"
-                                class="block px-4 py-2 transition-all duration-300 ease-out text-slate-300 rounded-xl hover:bg-gradient-to-r hover:from-pink-500 hover:to-rose-500 hover:text-white hover:shadow-lg hover:shadow-pink-500/30">
-                                نام و موبایل
-                            </x-nav-link-a>
-                        </li>
-                        <li>
-                            <x-nav-link-a :href="route('dashboard.setting.password')" :active="request()->routeIs('dashboard.setting.password')"
-                                class="block px-4 py-2 transition-all duration-300 ease-out text-slate-300 rounded-xl hover:bg-gradient-to-r hover:from-pink-500 hover:to-rose-500 hover:text-white hover:shadow-lg hover:shadow-pink-500/30">
-                                پسورد
-                            </x-nav-link-a>
-                        </li>
-                    </ul>
-                </li>
-
-
-                <hr class="my-4 md:min-w-full" />
-                <ul class="flex flex-col list-none md:flex-col md:min-w-full">
-                    <li class="items-center">
-                        <x-nav-link-a :href="route('dashboard.buy')" :active="request()->routeIs('dashboard.buy')">
-                            <!-- icon -->
-                            <svg xmlns="http://www.w3.org/2000/svg"
-                                class="w-5 h-5 transition-all duration-300 text-slate-400 group-hover:text-white group-hover:scale-110"
-                                fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
-                                    d="M2.25 8.25h19.5m-19.5 0A2.25 2.25 0 004.5 6h15a2.25 2.25 0 012.25 2.25m-19.5 0v7.5A2.25 2.25 0 004.5 18h15a2.25 2.25 0 002.25-2.25v-7.5" />
-                            </svg>
-
-                            <span>خرید</span>
-                        </x-nav-link-a>
-                    </li>
-                    <li class="items-center">
-                        <x-nav-link-a :href="route('dashboard.sell')" :active="request()->routeIs('dashboard.sell')">
-                            <svg xmlns="http://www.w3.org/2000/svg"
-                                class="w-5 h-5 text-slate-400 transition-all duration-300
-                              group-hover:text-white group-hover:scale-110 group-hover:-translate-y-0.5"
-                                fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
-                                    d="M7 17L17 7m0 0H7m10 0v10" />
-                            </svg>
-
-                            <span>فروش</span>
-                        </x-nav-link-a>
-                    </li>
-                </ul>
-
-                <!-- Divider -->
-                <hr class="my-4 md:min-w-full" />
-                <!-- Navigation -->
-
-                <li class="items-center">
-                    <a href="{{ route('logout') }}"
-                        class="relative flex items-center gap-3 px-4 py-3 text-sm font-medium transition-all duration-300 ease-out group rounded-xl text-slate-300 hover:bg-gradient-to-r hover:from-red-500 hover:to-rose-600 hover:text-white hover:shadow-lg hover:shadow-red-500/30">
-
-                        <svg xmlns="http://www.w3.org/2000/svg"
-                            class="w-5 h-5 transition-all duration-300 text-slate-400 group-hover:text-white group-hover:translate-x-1"
-                            fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
-                                d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6A2.25 2.25 0 005.25 5.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15M12 9l3 3m0 0l-3 3m3-3H3" />
+                <li>
+                    <x-nav-link-a :href="route('dashboard.buy')" :active="request()->routeIs('dashboard.buy')" class="flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium transition-all group">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-gray-400 group-hover:text-yellow-500 transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
                         </svg>
-                        <span>خروج</span>
-                    </a>
+                        <span>خرید طلا</span>
+                    </x-nav-link-a>
                 </li>
+                <li>
+                    <x-nav-link-a :href="route('dashboard.sell')" :active="request()->routeIs('dashboard.sell')" class="flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium transition-all group">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-gray-400 group-hover:text-yellow-500 transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M7 16V4m0 0L3 8m4-4l4 4m-4-4v12" />
+                        </svg>
+                        <span>فروش طلا</span>
+                    </x-nav-link-a>
+                </li>
+            </ul>
         </div>
+
+        <div>
+            <p class="px-4 mb-4 text-[10px] font-bold text-gray-400 uppercase tracking-wider">تنظیمات</p>
+            <ul class="space-y-2">
+                <li>
+                    <x-nav-link-a :href="route('dashboard.setting.profile')" :active="request()->routeIs('dashboard.setting.profile')" class="flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium transition-all group">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-gray-400 group-hover:text-yellow-500 transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                        </svg>
+                        <span>پروفایل</span>
+                    </x-nav-link-a>
+                </li>
+                <li>
+                    <x-nav-link-a :href="route('dashboard.setting.password')" :active="request()->routeIs('dashboard.setting.password')" class="flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium transition-all group">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-gray-400 group-hover:text-yellow-500 transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v-2H4a1 1 0 01-1-1v-4a1 1 0 011-1h3" />
+                        </svg>
+                        <span>رمز عبور</span>
+                    </x-nav-link-a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Logout Section -->
+    <div class="p-4 border-t border-gray-100 dark:border-gray-800">
+        <a href="{{ route('logout') }}" class="flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium text-gray-500 hover:text-red-500 hover:bg-red-50 dark:hover:bg-red-900/20 transition-all group">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-gray-400 group-hover:text-red-500 transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+            </svg>
+            <span>خروج از حساب</span>
+        </a>
     </div>
 </nav>

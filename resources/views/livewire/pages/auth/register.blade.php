@@ -37,52 +37,72 @@ new #[Layout('layouts.guest')] class extends Component
 }; ?>
 
 <div>
-    <form wire:submit="register">
-        <!-- Name -->
-        <div>
-            <x-input-label for="name" :value="__('نام')" />
-            <x-text-input wire:model.live="name" id="name" class="block w-full mt-1" type="text" name="name" required autofocus autocomplete="name" />
-            <x-input-error :messages="$errors->get('name')" class="mt-2" />
+    <form wire:submit="register" class="space-y-5">
+        <div class="space-y-2 text-right">
+            <label for="name" class="text-sm font-medium text-gray-600 dark:text-gray-400 block">{{ __('نام و نام خانوادگی') }}</label>
+            <input 
+                wire:model.live="name" 
+                id="name" 
+                type="text" 
+                name="name" 
+                required 
+                autofocus 
+                autocomplete="name" 
+                class="w-full px-4 py-3 rounded-xl border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-yellow-500 focus:border-transparent outline-none transition-all text-right"
+            />
+            <x-input-error :messages="$errors->get('name')" class="mt-1" />
         </div>
 
-        <!-- Email Address -->
-        <div class="mt-4">
-            <x-input-label for="email" :value="__('ایمیل')" />
-            <x-text-input wire:model.live="email" id="email" class="block w-full mt-1" type="email" name="email" required autocomplete="username" />
-            <x-input-error :messages="$errors->get('email')" class="mt-2" />
+        <div class="space-y-2 text-right">
+            <label for="email" class="text-sm font-medium text-gray-600 dark:text-gray-400 block">{{ __('ایمیل') }}</label>
+            <input 
+                wire:model.live="email" 
+                id="email" 
+                type="email" 
+                name="email" 
+                required 
+                autocomplete="username" 
+                class="w-full px-4 py-3 rounded-xl border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-yellow-500 focus:border-transparent outline-none transition-all text-right"
+            />
+            <x-input-error :messages="$errors->get('email')" class="mt-1" />
         </div>
 
-        <!-- Password -->
-        <div class="mt-4">
-            <x-input-label for="password" :value="__('پسورد')" />
-
-            <x-text-input wire:model.live="password" id="password" class="block w-full mt-1"
-                            type="password"
-                            name="password"
-                            required autocomplete="new-password" />
-
-            <x-input-error :messages="$errors->get('password')" class="mt-2" />
+        <div class="space-y-2 text-right">
+            <label for="password" class="text-sm font-medium text-gray-600 dark:text-gray-400 block">{{ __('رمز عبور') }}</label>
+            <input 
+                wire:model.live="password" 
+                id="password" 
+                type="password" 
+                name="password" 
+                required 
+                autocomplete="new-password" 
+                class="w-full px-4 py-3 rounded-xl border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-yellow-500 focus:border-transparent outline-none transition-all text-right"
+            />
+            <x-input-error :messages="$errors->get('password')" class="mt-1" />
         </div>
 
-        <!-- Confirm Password -->
-        <div class="mt-4">
-            <x-input-label for="password_confirmation" :value="__('تایید پسورد')" />
-
-            <x-text-input wire:model.live="password_confirmation" id="password_confirmation" class="block w-full mt-1"
-                            type="password"
-                            name="password_confirmation" required autocomplete="new-password" />
-
-            <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
+        <div class="space-y-2 text-right">
+            <label for="password_confirmation" class="text-sm font-medium text-gray-600 dark:text-gray-400 block">{{ __('تایید رمز عبور') }}</label>
+            <input 
+                wire:model.live="password_confirmation" 
+                id="password_confirmation" 
+                type="password" 
+                name="password_confirmation" 
+                required 
+                autocomplete="new-password" 
+                class="w-full px-4 py-3 rounded-xl border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-yellow-500 focus:border-transparent outline-none transition-all text-right"
+            />
+            <x-input-error :messages="$errors->get('password_confirmation')" class="mt-1" />
         </div>
 
-        <div class="flex items-center justify-end mt-4">
-            <a class="text-sm text-gray-600 underline rounded-md dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800" href="{{ route('login') }}" wire:navigate>
+        <div class="flex items-center justify-between pt-2">
+            <a class="text-sm text-gray-500 hover:text-yellow-600 dark:text-gray-400 dark:hover:text-yellow-400 underline transition-colors" href="{{ route('login') }}" wire:navigate>
                 {{ __('قبلا ثبت نام کرده اید؟') }}
             </a>
 
-            <x-primary-button class="ms-4">
+            <button type="submit" class="px-6 py-3 bg-yellow-500 hover:bg-yellow-600 text-white font-bold rounded-xl transition-all shadow-lg shadow-yellow-500/20 active:scale-[0.98]">
                 {{ __('ثبت نام') }}
-            </x-primary-button>
+            </button>
         </div>
     </form>
 </div>
