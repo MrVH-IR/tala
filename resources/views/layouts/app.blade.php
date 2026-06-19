@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" dir="rtl">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" dir="rtl" class="dark">
 
 <head>
     <meta charset="utf-8">
@@ -49,6 +49,8 @@
             </main>
         </div>
     </div>
+    <livewire:components.notification />
+    <script src="{{ asset('js/darkmode.js') }}"></script>
     @stack('scripts')
 </body>
 

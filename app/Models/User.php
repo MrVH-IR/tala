@@ -2,14 +2,18 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Database\Factories\UserFactory;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
-class User extends Authenticatable
+class User extends Authenticatable implements MustVerifyEmail
 {
-    /** @use HasFactory<\Database\Factories\UserFactory> */
+    /** @use HasFactory<UserFactory> */
     use HasFactory, Notifiable;
 
     /**
@@ -19,9 +23,11 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name',
+        'last_name',
+        'national_code',
         'email',
         'mobile',
-        'mobile_verified_at',
+        'previous_password',
         'password',
     ];
 
@@ -32,7 +38,12 @@ class User extends Authenticatable
      */
     protected $hidden = [
         'password',
+        'previous_password',
         'remember_token',
+    ];
+
+    protected $appends = [
+        'full_name',
     ];
 
     /**
@@ -44,7 +55,28 @@ class User extends Authenticatable
     {
         return [
             'email_verified_at' => 'datetime',
+            'mobile_verified_at' => 'datetime',
+            'national_code_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    protected function fullName(): Attribute
+    {
+        return Attribute::make(
+            get: fn () => collect([$this->name, $this->last_name])
+                ->filter()
+                ->implode(' ')
+        );
+    }
+
+    public function userCreditCardInformation(): HasOne
+    {
+        return $this->hasOne(UserCreditCardInformation::class);
+    }
+
+    public function paymentGateways(): HasMany
+    {
+        return $this->hasMany(PaymentGateway::class);
     }
 }

@@ -19,7 +19,7 @@ class GoldApi
 
                     $client = new Client([
                         'timeout' => 10,
-                        'verify'  => true,
+                        'verify' => true,
                     ]);
 
                     $response = $client->get(
@@ -42,6 +42,7 @@ class GoldApi
             );
             $currency['gold'] = array_map(function ($gold) {
                 $gold['price'] = (float) $gold['price'] * 1.01;
+
                 return $gold;
             }, $currency['gold']);
 
@@ -55,7 +56,7 @@ class GoldApi
                 );
             }
 
-            $errorID = now()->format('YmdHis') . rand(1000, 9999);
+            $errorID = now()->format('YmdHis').rand(1000, 9999);
 
             Log::error(
                 "Exception {$errorID}: {$e->getMessage()}",

@@ -1,89 +1,55 @@
-<!-- Footer -->
-<footer class="py-16 mt-20 space-y-4 text-sm text-center text-black dark:text-white/70">
-  <div class="container px-4 mx-auto">
-    <div class="flex flex-wrap text-center lg:text-left">
-      <div class="w-full px-4 lg:w-6/12">
-        <h4 class="text-3xl font-semibold">با ما در ارتباط باشید !</h4>
-        <div class="mt-6 mb-6 lg:mb-0">
-            <a href="https://t.me/goldina" class="pr-3 text-gray-400 transition hover:text-yellow-500">تلگرام</a>
-            <a href="https://facebook.com/goldina" class="pr-3 text-gray-400 transition hover:text-yellow-500">فیسبوک</a>
-            <a href="https://x.com/goldina" class="pr-3 text-gray-400 transition hover:text-yellow-500">توییتر</a>
-            <a href="https://instagram.com/goldina" class="pr-3 text-gray-400 transition hover:text-yellow-500">اینستاگرام</a>
-        </div>
-      </div>
-      <div class="w-full px-4 lg:w-6/12">
-        <div class="flex flex-wrap mb-6 items-top">
-          <div class="w-full px-4 ml-auto lg:w-4/12">
-            <span
-              class="block mb-2 text-sm font-semibold uppercase text-blueGray-500"
-            >
+<footer class="py-16 mt-20 text-sm text-center text-gray-600 dark:text-gray-300">
+    <div class="container mx-auto px-4">
+
+        <div class="flex flex-wrap text-center lg:text-left">
+
+            <!-- Social -->
+            <div class="w-full lg:w-6/12 px-4">
+                <h4 class="text-3xl font-semibold">با ما در ارتباط باشید</h4>
+
+                <div class="mt-6 flex justify-center lg:justify-start gap-4">
+                    <a href="#" class="hover:text-yellow-500 transition">تلگرام</a>
+                    <a href="#" class="hover:text-yellow-500 transition">فیسبوک</a>
+                    <a href="#" class="hover:text-yellow-500 transition">توییتر</a>
+                    <a href="#" class="hover:text-yellow-500 transition">اینستاگرام</a>
+                </div>
+            </div>
+
+            <!-- Links -->
+            <div class="w-full lg:w-6/12 px-4 mt-10 lg:mt-0">
+                <div class="flex flex-wrap">
+
+                    <div class="w-full lg:w-1/2">
+            <span class="block mb-3 font-semibold uppercase text-gray-500">
               لینک های مرتبط
             </span>
-            <ul class="list-unstyled">
-              <li>
-                <a
-                  class="block pb-2 text-sm font-semibold text-blueGray-600 hover:text-blueGray-800"
-                  href="{{ route('home') }}"
-                >
-                  درباره ما
-                </a>
-              </li>
-              <li>
-                <a
-                  class="block pb-2 text-sm font-semibold text-blueGray-600 hover:text-blueGray-800"
-                  href="{{ route('home') }}"
-                >
-                  بلاگ
-                </a>
-              </li>
-            </ul>
-          </div>
-          <div class="w-full px-4 lg:w-4/12">
-            <span
-              class="block mb-2 text-sm font-semibold uppercase text-blueGray-500"
-            >
-              منابع مرتبط
+                        <ul class="space-y-2">
+                            <li><a href="{{ route('about') }}" class="hover:text-gray-900 dark:hover:text-white">درباره ما</a></li>
+                            <li><a href="{{ route('blog') }}" class="hover:text-gray-900 dark:hover:text-white">بلاگ</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="w-full lg:w-1/2 mt-6 lg:mt-0">
+            <span class="block mb-3 font-semibold uppercase text-gray-500">
+              منابع
             </span>
-            <ul class="list-unstyled">
-              <li>
-                <a
-                  class="block pb-2 text-sm font-semibold text-blueGray-600 hover:text-blueGray-800"
-                  href="#"
-                >
-                  قوانین
-                </a>
-              </li>
-              <li>
-                <a
-                  class="block pb-2 text-sm font-semibold text-blueGray-600 hover:text-blueGray-800"
-                  href="#"
-                >
-                  حقوق اطلاعات کاربر
-                </a>
-              </li>
-              <li>
-                <a
-                  class="block pb-2 text-sm font-semibold text-blueGray-600 hover:text-blueGray-800"
-                  href="#"
-                >
-                  تماس با ما
-                </a>
-              </li>
-            </ul>
-          </div>
+                        <ul class="space-y-2">
+                            <li><a href="{{ route('rules') }}" class="hover:text-gray-900 dark:hover:text-white">قوانین</a></li>
+                            <li><a href="{{ route('privacy') }}" class="hover:text-gray-900 dark:hover:text-white">حریم خصوصی</a></li>
+                            <li><a href="{{ route('contact') }}" class="hover:text-gray-900 dark:hover:text-white">تماس</a></li>
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+
         </div>
-      </div>
-    </div>
-    <hr class="my-6 border-blueGray-300" />
-    <div
-      class="flex flex-wrap items-center justify-center md:justify-between"
-    >
-      <div class="w-full px-4 mx-auto text-center md:w-4/12">
-        <div class="py-1 text-sm font-semibold text-blueGray-500">
-          Copyright ©2026 <span id="get-current-year"></span>  تمامی حقوق گلدینا محفوظ می باشد
-          .
+
+        <hr class="my-8 border-gray-300 dark:border-gray-700">
+
+        <div class="text-center">
+            Copyright © 2026
         </div>
-      </div>
+
     </div>
-  </div>
 </footer>

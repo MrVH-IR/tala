@@ -2,18 +2,21 @@
 
 namespace App\Livewire;
 
+use App\Classes\GoldApi;
 use App\Models\Accounter\Wallet;
-use App\Models\Accounter\WalletTransaction;
-use App\Models\Accounter\Asset;
-use App\Models\Accounter\MarketPrice;
-use Livewire\Component;
 use Illuminate\Support\Facades\Auth;
+use Livewire\Component;
 
 class DashboardComponent extends Component
 {
     public function render()
     {
         $user = Auth::user();
+
+        if (! session()->has('welcome_notified')) {
+            $this->dispatch('app-notification', 'خوش آمدید');
+            session()->put('welcome_notified', true);
+        }
 
         // Fetch all wallets for the user
         $wallets = Wallet::with('asset')
@@ -22,29 +25,24 @@ class DashboardComponent extends Component
 
         // Calculate total portfolio value in Toman
         $totalValueToman = 0;
-        foreach ($wallets as $wallet) {
-            $latestPrice = MarketPrice::where('asset_id', $wallet->asset_id)
-                ->latest('priced_at')
-                ->first();
-
-            if ($latestPrice) {
-                $totalValueToman += $wallet->balance * $latestPrice->price;
-            }
-        }
 
         // Fetch recent transactions
-        $transactions = WalletTransaction::with(['wallet.asset'])
+        $transactions = Wallet::with('asset')
             ->where('user_id', $user->id)
             ->latest()
             ->take(5)
             ->get();
 
+        $goldApi = (new GoldApi)();
+
+        $userProfileStatus = $user->userCreditCardInformation()->first('verified_at');
+
         return view('livewire.dashboard', [
             'wallets' => $wallets,
             'transactions' => $transactions,
             'user' => $user,
+            'userProfileStatus' => $userProfileStatus,
             'totalValueToman' => $totalValueToman,
         ])->layout('layouts.app');
     }
 }
-

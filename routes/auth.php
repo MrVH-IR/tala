@@ -6,9 +6,11 @@ use Livewire\Volt\Volt;
 
 Route::middleware('guest')->group(function () {
     Volt::route('register', 'pages.auth.register')
+        ->middleware('throttle:5,1')
         ->name('register');
 
     Volt::route('login', 'pages.auth.login')
+        ->middleware('throttle:5,1')
         ->name('login');
 
     Volt::route('forgot-password', 'pages.auth.forgot-password')

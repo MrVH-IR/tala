@@ -62,7 +62,7 @@ new #[Layout('layouts.guest')] class extends Component
             <button wire:click="sendVerification" class="w-full py-3 px-4 bg-yellow-500 hover:bg-yellow-600 text-white font-bold rounded-xl transition-all shadow-lg shadow-yellow-500/20 active:scale-[0.98]">
                 {{ __('ارسال مجدد ایمیل تایید') }}
             </button>
-            
+
             <button wire:click="logout" class="text-sm text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 underline transition-colors">
                 {{ __('خروج از حساب') }}
             </button>

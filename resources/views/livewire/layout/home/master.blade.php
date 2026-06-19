@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="dark">
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -23,7 +23,7 @@
         <div class="min-h-screen bg-gray-50 dark:bg-black text-black/50 dark:text-white/50">
             <div class="relative w-full px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
 
-                <header class="flex items-center justify-between py-10">
+                <header class="flex items-center justify-between py-10" dir="rtl">
                     @include('livewire.layout.home.header')
                     @yield('header')
                 </header>
@@ -39,5 +39,6 @@
 
             </div>
         </div>
+        <script src="{{ asset('js/darkmode.js') }}"></script>
     </body>
 </html>

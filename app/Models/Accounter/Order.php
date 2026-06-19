@@ -2,27 +2,31 @@
 
 namespace App\Models\Accounter;
 
-use App\Models\User;
 use App\Models\Admin\Admin;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Testing\Fluent\Concerns\Has;
 
 class Order extends Model
 {
-    use HasFactory;
     protected $fillable = [
-        "user_id",
-        "asset_id",
-        "type",
-        "amount",
-        "price",
-        "total_money",
-        "status",
-        "confirmed_by",
-        "confirmed_at"
+        'user_id',
+        'asset_id',
+        'type',
+        'amount',
+        'price',
+        'total_money',
+        'status',
+        'confirmed_by',
+        'confirmed_at',
     ];
+
+    protected function casts(): array
+    {
+        return [
+            'confirmed_at' => 'datetime',
+        ];
+    }
 
     public function user(): BelongsTo
     {

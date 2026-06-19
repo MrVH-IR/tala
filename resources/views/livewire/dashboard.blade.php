@@ -2,8 +2,8 @@
     <!-- Welcome Header -->
     <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
-            <h1 class="text-3xl font-bold text-gray-900 dark:text-white">سلام، {{ $user->name }} 👋</h1>
-            <p class="text-gray-500 dark:text-gray-400">خوش آمدید! وضعیت دارایی‌های شما به شرح زیر است.</p>
+            <h1 class="text-3xl font-bold text-gray-900 dark:text-white">سلام {{ $user->name }} 👋</h1>
+            <p class="text-gray-500 dark:text-gray-400">خوش اومدی! وضعیت دارایی‌های شما به شرح زیر است.</p>
         </div>
         <div class="flex gap-3">
             <a href="{{ route('dashboard.buy') }}" class="px-5 py-2.5 bg-yellow-500 hover:bg-yellow-600 text-white font-bold rounded-xl transition-all shadow-lg shadow-yellow-500/20 text-sm">
@@ -23,10 +23,10 @@
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
                     </svg>
                 </div>
-                <span class="text-xs font-bold bg-white/20 px-3 py-1 rounded-full uppercase">کل دارایی‌ها</span>
+                <span class="text-xs font-bold bg-white/20 px-3 py-1 rounded-full uppercase text-gray-950">کل دارایی‌ها</span>
             </div>
             <div class="space-y-1 text-right relative z-10">
-                <p class="text-yellow-100 text-xs">ارزش تخمینی کل سبد</p>
+                <p class="text-black text-xs">ارزش تخمینی کل سبد</p>
                 <div class="flex items-baseline justify-end gap-2">
                     <span class="text-3xl font-extrabold font-mono">
                         {{ number_format($totalValueToman) }}
@@ -123,11 +123,15 @@
                     <p class="text-xs text-gray-500">{{ $user->email }}</p>
                 </div>
             </div>
-            
+
             <div class="space-y-4">
                 <div class="flex justify-between items-center p-3 rounded-2xl bg-gray-50 dark:bg-gray-800/50">
-                    <span class="text-sm text-gray-500">وضعیت حساب</span>
+                    <span class="text-sm text-gray-500">وضعیت پروفایل</span>
+                    @if($userProfileStatus['verified_at'])
                     <span class="text-xs font-bold text-green-500">تایید شده</span>
+                    @else
+                        <span class="text-xs font-bold text-yellow-500">تایید نشده</span>
+                    @endif
                 </div>
                 <div class="flex justify-between items-center p-3 rounded-2xl bg-gray-50 dark:bg-gray-800/50">
                     <span class="text-sm text-gray-500">سطح دسترسی</span>
