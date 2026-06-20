@@ -4,38 +4,61 @@ namespace App\Livewire;
 
 use App\Classes\GoldApi;
 use App\Models\Accounter\Wallet;
+use App\Models\Accounter\WalletTransaction;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
+use Livewire\WithPagination;
 
 class DashboardComponent extends Component
 {
+    use WithPagination;
+
+    protected $paginationTheme = 'tailwind';
+
     public function render()
     {
         $user = Auth::user();
 
-        if (! session()->has('welcome_notified')) {
-            $this->dispatch('app-notification', 'خوش آمدید');
-            session()->put('welcome_notified', true);
-        }
-
-        // Fetch all wallets for the user
         $wallets = Wallet::with('asset')
             ->where('user_id', $user->id)
             ->get();
 
-        // Calculate total portfolio value in Toman
-        $totalValueToman = 0;
-
-        // Fetch recent transactions
-        $transactions = Wallet::with('asset')
-            ->where('user_id', $user->id)
+        $transactions = WalletTransaction::with([
+            'wallet.asset',
+        ])
+            ->whereHas('wallet', fn ($q) => $q->where('user_id', $user->id)
+            )
             ->latest()
-            ->take(5)
-            ->get();
+            ->paginate(5);
 
-        $goldApi = (new GoldApi)();
+        $apiResource = (new GoldApi)();
+        $api = $apiResource->getData(true);
+
+        $map = collect()
+            ->merge($api['gold'] ?? [])
+            ->merge($api['currency'] ?? [])
+            ->merge($api['cryptocurrency'] ?? [])
+            ->keyBy('symbol');
+
+        $wallets->transform(function ($wallet) use ($map) {
+            $symbol = $wallet->asset->symbol ?? null;
+            $wallet->market_data = $map[$symbol] ?? null;
+
+            return $wallet;
+        });
 
         $userProfileStatus = $user->userCreditCardInformation()->first('verified_at');
+
+        $totalValueToman = $wallets->sum(function ($wallet) use ($map) {
+
+            $symbol = $wallet->asset->symbol ?? null;
+
+            $market = $map[$symbol] ?? null;
+
+            $price = $market['price'] ?? 0;
+
+            return (float) $wallet->balance * $price;
+        });
 
         return view('livewire.dashboard', [
             'wallets' => $wallets,
