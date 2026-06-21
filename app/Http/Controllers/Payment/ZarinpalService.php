@@ -7,7 +7,9 @@ use App\Models\User;
 use Illuminate\Http\Client\ConnectionException;
 use Illuminate\Http\Client\RequestException;
 use Illuminate\Support\Facades\Http;
+use JetBrains\PhpStorm\Deprecated;
 
+#[Deprecated(reason: 'This app uses a Request - Admin approve system. Not a payment gateway', since: '8.4')]
 class ZarinpalService
 {
     /**
@@ -24,7 +26,7 @@ class ZarinpalService
             ->timeout(10)
             ->retry(2, 1000)
             ->post(
-                'https://payment.zarinpal.com/pg/v4/payment/request.json',
+                'https://sandbox.zarinpal.com/pg/v4/payment/request.json',
                 [
                     'merchant_id' => config('zarinpal.zarinpal.merchant_id'),
                     'amount' => $amount,

@@ -25,6 +25,9 @@ Route::get('/contact', ContactForm::class)->name('contact');
 Route::prefix('dashboard')->middleware(['auth', EnsureEmailIsVerified::class])->group(function () {
     Route::get('/', DashboardComponent::class)->name('dashboard');
     Route::get('/buy', BuyComponent::class)->middleware('auth', 'verified', EnsureUserHasPaymentProfile::class)->name('dashboard.buy');
+    //    Route::get('/payment/order', [PaymentController::class, 'pay'])->name('payment.order');
+    //    Route::get('/payment/callback', [PaymentController::class, 'callback'])->name('dashboard.payment.callback');
+    Route::get('/payment/order', [PaymentController::class, 'requestAsset'])->name('dashboard.payment.requestAsset');
     Route::get('/sell')->name('dashboard.sell');
     Route::get('/setting', function () {
         return view('livewire.settings.index');
@@ -38,8 +41,6 @@ Route::prefix('dashboard')->middleware(['auth', EnsureEmailIsVerified::class])->
         ->middleware('throttle:10,1')
         ->name('dashboard.setting.password');
 
-    Route::post('/payment/order/{user}', [PaymentController::class, 'pay'])->name('payment.order');
-    Route::get('/payment/callback/{user}', [PaymentController::class, 'callback'])->name('dashboard.payment.callback');
 });
 
 Route::view('profile', 'profile')->middleware(['auth'])->name('profile');

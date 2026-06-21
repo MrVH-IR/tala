@@ -12,7 +12,6 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vazirmatn@33.003/Vazirmatn-font-face.css">
 
     <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
@@ -50,6 +49,12 @@
         </div>
     </div>
     <livewire:components.notification />
+    @if(session()->has('notification'))
+        <x-flash-notification
+            :message="session('notification.message')"
+            :type="session('notification.type')"
+        />
+    @endif
     <script src="{{ asset('js/darkmode.js') }}"></script>
     @stack('scripts')
 </body>

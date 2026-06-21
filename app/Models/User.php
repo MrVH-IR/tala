@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Accounter\Order;
+use App\Models\Accounter\ZarinpalResponse;
 use Database\Factories\UserFactory;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Casts\Attribute;
@@ -84,5 +85,10 @@ class User extends Authenticatable implements MustVerifyEmail
     public function orders(): HasMany
     {
         return $this->hasMany(Order::class);
+    }
+
+    public function zarinPals(): HasMany
+    {
+        return $this->hasMany(ZarinpalResponse::class);
     }
 }

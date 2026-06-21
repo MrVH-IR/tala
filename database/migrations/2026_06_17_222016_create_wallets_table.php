@@ -18,7 +18,7 @@ return new class extends Migration
 
             $table->decimal('balance', 36, 18)->default(0);
             // Cannot Sell if locked (SELLING) until further notice or unlocked
-            $table->decimal('locked_balance', 36, 18)->default(0);
+            $table->decimal('locked_balance', 36, 18)->nullable()->default(0);
 
             $table->timestamps();
             $table->unique(['user_id', 'asset_id']);

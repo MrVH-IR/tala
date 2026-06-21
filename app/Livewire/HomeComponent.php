@@ -7,11 +7,14 @@ use Livewire\Component;
 
 class HomeComponent extends Component
 {
-
     public $gold = [];
+
     public $currency = [];
+
     public string $amount = '';
+
     public float $weight = 0;
+
     public float $gold18Price = 0;
 
     public function calcGold(GoldApi $goldApi): void
@@ -27,7 +30,7 @@ class HomeComponent extends Component
         );
     }
 
-    public function updatedAmount($value)
+    public function updatedAmount($value): void
     {
         $cleanAmount = (float) str_replace(',', '', $value);
 
@@ -38,7 +41,7 @@ class HomeComponent extends Component
         }
     }
 
-    public function mount(GoldApi $goldApi)
+    public function mount(GoldApi $goldApi): void
     {
         $response = $goldApi();
 
@@ -46,9 +49,10 @@ class HomeComponent extends Component
         $this->currency = $response->getData(true)['currency'] ?? [];
         $this->calcGold($goldApi);
     }
+
     public function render()
     {
         return view('livewire.home')
-        ->layout('livewire.layout.home.master');
+            ->layout('livewire.layout.home.master');
     }
 }

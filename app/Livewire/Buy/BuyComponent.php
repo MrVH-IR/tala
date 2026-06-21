@@ -22,6 +22,16 @@ class BuyComponent extends Component
 
     public float $total = 0;
 
+    protected function rules(): array
+    {
+        return [
+            'category' => ['required', 'in:gold,currency,crypto'],
+            'selectedSymbol' => ['required', 'string'],
+            'amount' => ['required', 'numeric', 'min:0.000001'],
+            'unit' => ['required', 'string'],
+        ];
+    }
+
     // Map categories to their allowed units
     protected function categoryUnits(): array
     {
@@ -34,6 +44,9 @@ class BuyComponent extends Component
 
     public function mount(GoldApi $goldApi)
     {
+        if (session()->has('error')) {
+            $this->dispatch('app-notification', 'مشکلی پیش آمده است');
+        }
         $this->loadItems($goldApi);
     }
 
@@ -115,40 +128,73 @@ class BuyComponent extends Component
 
     public function processPurchase()
     {
-        if (empty($this->selectedSymbol) || empty($this->amount) || $this->total <= 0) {
-            session()->flash('error', 'لطفاً تمامی موارد را به درستی انتخاب کنید.');
+        $this->validate();
 
-            return;
+        $allowedUnits = $this->availableUnits;
+
+        if (! in_array($this->unit, $allowedUnits, true)) {
+            abort(403);
         }
 
-        $asset = Asset::where('symbol', $this->selectedSymbol)->first();
+        $asset = Asset::query()
+            ->where('symbol', $this->selectedSymbol)
+            ->first();
+
         if (! $asset) {
-            session()->flash('error', 'دارایی انتخاب شده یافت نشد.');
+
+            $this->addError(
+                'selectedSymbol',
+                'دارایی انتخاب شده معتبر نیست.'
+            );
 
             return;
         }
 
-        // We calculate the actual asset amount based on the unit
-        // If user buys in Toman, the amount of asset is Total / Price
-        $finalAssetAmount = ($this->unit === 'toman')
-            ? $this->total / ($this->selectedPrice ?: 1)
-            : (float) $this->amount;
+        $item = collect($this->items)
+            ->firstWhere('symbol', $this->selectedSymbol);
 
-        // Redirect to PaymentController using a POST request (via a temporary route or just passing data)
-        // Since we are in Livewire, we can't easily do a POST to a controller.
-        // The best way is to use a session-based temporary store or a hidden form.
-        // However, for the sake of this flow, we will redirect to a route that takes parameters.
+        if (! $item) {
+            abort(403);
+        }
 
-        // We use a redirect to a route that will then handle the PaymentController logic.
-        return redirect()->route('payment.order', [
-            'user' => auth()->id(),
-            'source_id' => $asset->id,
-            'amount' => $this->total,
-            'price' => $this->selectedPrice,
-            'asset_amount' => $finalAssetAmount,
-            'description' => "Purchase of {$asset->name}",
-            'source_type' => 'CREDIT', // As per OrderEnum
+        $realPrice = (float) $item['price'];
+
+        if ($realPrice <= 0) {
+            abort(403);
+        }
+
+        $enteredAmount = (float) $this->amount;
+
+        if ($this->unit === 'toman') {
+
+            $payableAmount = $enteredAmount;
+
+            $assetAmount = round(
+                $payableAmount / $realPrice,
+                8
+            );
+
+        } else {
+
+            $assetAmount = round(
+                $enteredAmount,
+                8
+            );
+
+            $payableAmount = round(
+                $assetAmount * $realPrice,
+                0
+            );
+        }
+
+        session()->put('purchase', [
+            'asset_id' => $asset->id,
+            'asset_amount' => $assetAmount,
+            'payable_amount' => $payableAmount,
+            'price' => $realPrice,
         ]);
+
+        return redirect()->route('dashboard.payment.requestAsset');
     }
 
     public function render()

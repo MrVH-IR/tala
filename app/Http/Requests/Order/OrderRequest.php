@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Order;
 
 use App\Order\OrderEnum;
+use App\Order\OrderStatusEnum;
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
@@ -25,35 +26,51 @@ class OrderRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'source_type' => ['required', Rule::enum(OrderEnum::class), 'string', 'max:100'],
-            'amount' => 'required|numeric|min:1000', // Total money to pay
-            'price' => 'nullable|numeric|min:0',    // Price per unit
-            'description' => 'nullable|string|max:5000',
-            'source_id' => 'required|integer|exists:assets,id',
+            'user_id' => ['required', 'exists:users,id', 'string'],
+            'asset_id' => ['required', 'exists:assets,id', 'string'],
+            'type' => ['required', Rule::enum(OrderEnum::class), 'string', 'max:6'],
+            'amount' => 'required|numeric|min:0|max:100000000000000000000000000000000000',
+            'price' => 'required|numeric|min:0|max:100000000000000000000000000000000000',
+            'total_money' => 'required|numeric|min:0|max:100000000000000000000000000000000000',
+            'status' => ['required', 'string', 'max:20', Rule::enum(OrderStatusEnum::class)],
         ];
     }
 
     public function messages(): array
     {
         return [
-            'source_type.required' => 'نوع منبع الزامی است.',
-            'source_type.enum' => 'نوع منبع انتخاب‌ شده معتبر نیست.',
-            'source_type.string' => 'نوع منبع باید به صورت متن باشد.',
-            'source_type.max' => 'نوع منبع نمی‌تواند بیشتر از ۱۰۰ کاراکتر باشد.',
-            'source_type.regex' => 'نوع منبع فقط می‌تواند شامل حروف انگلیسی و اعداد باشد.',
+            'user_id.required' => 'نوع منبع الزامی است.',
+            'user_id.string' => 'نوع منبع باید به صورت متن باشد.',
+            'user_id.exists' => 'کاربر مورد نظر وجود ندارد',
+
+            'asset_id.required' => 'نماد الزامی است',
+            'asset_id.string' => 'نوع نماد باید به صورت متن باشد',
+            'asset_id.exists' => 'نماد مورد نظر وجود ندارد',
+
+            'type.required' => 'درخواست شما نوع انجام عملیات ندارد',
+            'type.string' => 'درخواست عملیات باید به صورت متن باشد',
+            'type.enum' => 'نوع درخواست عملیات اشتباه است',
+            'type.max' => 'تعداد کاراکتر های درخواست عملیات زیاد است',
 
             'amount.required' => 'مبلغ الزامی است.',
             'amount.numeric' => 'مبلغ باید یک عدد باشد.',
-            'amount.min' => 'مبلغ نمی‌تواند کمتر از ۱۰۰٬۰۰۰ باشد.',
-            'amount.regex' => 'فرمت مبلغ صحیح نیست (حداکثر دو رقم اعشار مجاز است).',
+            'amount.min' => 'مبلغ نمی‌تواند کمتر از ۰ باشد.',
+            'amount.max' => 'مبلغ مورد نظر نمیتواند بیشتر از ۳۶ رقم باشد',
 
-            'description.string' => 'توضیحات باید به صورت متن باشد.',
-            'description.max' => 'توضیحات نمی‌تواند بیشتر از ۲۵۵ کاراکتر باشد.',
-            'description.regex' => 'توضیحات شامل کاراکترهای غیرمجاز است.',
+            'price.numeric' => 'مبلغ باید به صورت عددی باشد',
+            'price.required' => 'مبلغ الزامی می باشد',
+            'price.min' => 'مبلغ نماد نمی تواند ۰ باشد',
+            'price.max' => 'مبلغ نماد بیشتر از ۳۶ رقم نمی تواند باشد',
 
-            'source_id.required' => 'شناسه منبع الزامی است.',
-            'source_id.integer' => 'شناسه منبع باید عدد صحیح باشد.',
-            'source_id.exists' => 'منبع انتخاب‌ شده در سیستم وجود ندارد.',
+            'total_money.required' => 'مبلغ کل الزامی می باشد',
+            'total_money.numeric' => 'مبلغ کل باید عدد باشد',
+            'total_money.min' => 'مبلغ کل نمیتواند ۰ باشد',
+            'total_money.max' => 'مبلغ کل نمیتواند بیشتر از ۳۶ رقم باشد',
+
+            'status.required' => 'حالت حاظر درخواست را وارد کنید',
+            'status.string' => 'حالت حاظر درخواست باید متن باشد',
+            'status.enum' => 'حالت حاظر درخواست اشتباه است',
+            'status.max' => 'حالت حاظر درخواست طولانی است',
         ];
     }
 }

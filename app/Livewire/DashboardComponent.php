@@ -19,6 +19,11 @@ class DashboardComponent extends Component
     {
         $user = Auth::user();
 
+        if (! session('welcome-notification')) {
+            $this->dispatch('app-notification', 'خوش آمدید');
+            session()->put('welcome-notification', true);
+        }
+
         $wallets = Wallet::with('asset')
             ->where('user_id', $user->id)
             ->get();

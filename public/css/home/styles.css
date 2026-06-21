@@ -2,9 +2,16 @@
 
 @font-face {
   font-family: "IranSans";
-  src: url("../fonts/IranianSans/IranianSans.ttf");
+  src: url(../../fonts/IranianSans/IranianSans.ttf);
   font-weight: normal;
   font-style: normal;
+}
+
+@font-face {
+    font-family: "Varazamin";
+    src: url(../../fonts/Varazamin/Vazirmatn-Regular.ttf);
+    font-weight: normal;
+    font-style: normal;
 }
 
 :root {
