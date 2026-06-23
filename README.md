@@ -18,7 +18,7 @@
 ⚙️ Tech Stack
 
     Laravel 12 – Backend framework
-    Livewire – Reactive UI without heavy JavaScript
+    Livewire 3 – Reactive UI without heavy JavaScript
     Alpine.js – Lightweight frontend interactions
     MySQL – Database layer
     TailwindCSS – UI styling
@@ -117,6 +117,3 @@ Built by a backend developer focused on:
     Clean backend design
     Real-time UI systems
     Scalable fintech applications
-⚠️ Disclaimer
-
-    This project does not connect to real financial markets and is intended for simulation and development purposes only.

@@ -68,4 +68,15 @@ class OrderService
             throw new $th;
         }
     }
+
+    public function createSellRequest(Order $order)
+    {
+        try {
+            DB::transaction(function () use ($order) {
+                return DB::table('wallets')->where('id', $order->id)->update([]);
+            });
+        } catch (Throwable $th) {
+            DB::rollBack();
+        }
+    }
 }

@@ -17,6 +17,7 @@ class Order extends Model
         'price',
         'total_money',
         'status',
+        'idempotency_key',
         'confirmed_by',
         'confirmed_at',
     ];
