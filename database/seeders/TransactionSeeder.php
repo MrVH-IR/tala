@@ -10,6 +10,7 @@ use App\Models\Admin\Admin;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Str;
 
 class TransactionSeeder extends Seeder
 {
@@ -50,8 +51,11 @@ class TransactionSeeder extends Seeder
             $amount = fake()->randomFloat(4, 0.1, 5);
             $price = fake()->numberBetween(100000, 5000000);
 
+            $key = Str::uuid()->toString();
+
             $orders->push(
                 Order::create([
+                    'key' => $key,
                     'user_id' => $user->id,
                     'asset_id' => $asset->id,
                     'type' => Arr::random(['BUY', 'SELL']),

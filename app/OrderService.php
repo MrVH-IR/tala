@@ -21,6 +21,7 @@ class OrderService
         try {
             return DB::transaction(function () use ($user, $data) {
                 return Order::create([
+                    'key' => $data['key'],
                     'user_id' => $user->id,
                     'asset_id' => $data['asset_id'],
                     'type' => 'BUY',

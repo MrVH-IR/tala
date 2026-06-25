@@ -36,7 +36,11 @@ return [
     ],
 
     'bprsapi' => [
-        'key' => env('BRS_API_KEY')
-    ]
+        'key' => env('BRS_API_KEY'),
+    ],
+
+    'admin_gold_api' => [
+        'key' => env('ADMIN_GOLD_API_KEY'),
+    ],
 
 ];

@@ -18,6 +18,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Str;
 use JetBrains\PhpStorm\Deprecated;
 use Throwable;
 
@@ -234,9 +235,12 @@ class PaymentController extends Controller
         try {
             DB::beginTransaction();
 
+            $data['key'] = Str::uuid()->toString();
+
             $order = $this->orderService->createPurchaseOrder(
                 $user,
                 [
+                    'key' => $data['key'],
                     'asset_id' => $data['asset_id'], // Asset ID in DB
                     'amount' => $data['asset_amount'], // How many Users Want
                     'price' => $data['price'], // How much it Costs the user

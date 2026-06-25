@@ -49,12 +49,6 @@
         </div>
     </div>
     <livewire:components.notification />
-    @if(session()->has('notification'))
-        <x-flash-notification
-            :message="session('notification.message')"
-            :type="session('notification.type')"
-        />
-    @endif
     <script src="{{ asset('js/darkmode.js') }}"></script>
     @stack('scripts')
 </body>

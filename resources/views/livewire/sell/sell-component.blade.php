@@ -1,18 +1,18 @@
 <div class="py-8">
     <div class="mx-auto max-w-4xl space-y-8">
-        
+
         <!-- 🔴 Step 1: Asset Selection from Wallet -->
         <section class="space-y-4">
             <div class="flex items-center gap-3 mb-2">
                 <div class="flex items-center justify-center w-8 h-8 rounded-full bg-red-500 text-white font-bold text-sm">۱</div>
                 <h3 class="text-xl font-bold text-gray-900 dark:text-white">انتخاب دارایی برای فروش</h3>
             </div>
-            
+
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                 @forelse($wallets as $wallet)
-                    <div 
+                    <div
                         wire:click="selectItem('{{ $wallet['symbol'] }}')"
-                        class="group relative cursor-pointer p-5 rounded-3xl border-2 transition-all duration-300 
+                        class="group relative cursor-pointer p-5 rounded-3xl border-2 transition-all duration-300
                         {{ $selectedSymbol === $wallet['symbol'] ? 'border-red-500 bg-red-50 dark:bg-red-900/20 shadow-md' : 'border-gray-100 dark:border-gray-800 bg-white dark:bg-gray-900 hover:border-red-200 dark:hover:border-gray-700' }}"
                     >
                         <div class="flex justify-between items-start mb-4">
@@ -68,8 +68,8 @@
                             <span class="text-xs text-gray-400">حداکثر: {{ number_format($availableBalance, 4) }}</span>
                         </div>
                         <div class="relative">
-                            <input 
-                                type="text" 
+                            <input
+                                type="text"
                                 wire:model.live.debounce.300ms="amount"
                                 class="w-full px-4 py-4 rounded-2xl border-2 border-gray-100 dark:border-gray-800 bg-gray-50 dark:bg-gray-800 text-gray-900 dark:text-white focus:border-red-500 focus:ring-0 transition-all outline-none text-lg font-semibold"
                                 placeholder="مثلاً ۰.۵"
@@ -91,7 +91,7 @@
                                 $percentages = [25, 50, 75, 100];
                             @endphp
                             @foreach($percentages as $pct)
-                                <button 
+                                <button
                                     wire:click="$set('amount', {{ $availableBalance * ($pct/100) }})"
                                     class="py-2 px-1 rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 text-xs font-bold text-gray-600 dark:text-gray-400 hover:border-red-500 hover:text-red-500 transition-all"
                                 >
@@ -117,7 +117,7 @@
                 </div>
 
                 <!-- CTA Button -->
-                <button 
+                <button
                     wire:click="processSale"
                     wire:loading.attr="disabled"
                     class="w-full py-5 px-6 bg-red-500 hover:bg-red-600 disabled:bg-gray-400 text-white font-black text-xl rounded-2xl transition-all duration-300 transform hover:scale-[1.02] active:scale-[0.98] shadow-lg shadow-red-500/30 flex items-center justify-center gap-3"

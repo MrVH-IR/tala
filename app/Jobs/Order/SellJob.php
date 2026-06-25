@@ -30,8 +30,7 @@ class SellJob implements ShouldQueue
     {
         try {
             DB::transaction(function () {
-                DB::beginTransaction();
-                if (Order::where('idempotency_key', $this->sell['idempotency_key'])->exists()) {
+                if (Order::where('key', $this->sell['key'])->exists()) {
                     throw new Exception('This transaction already processed');
                 }
 
@@ -56,7 +55,7 @@ class SellJob implements ShouldQueue
                     ->firstOrFail();
 
                 Order::create([
-                    'idempotency_key' => $this->sell['idempotency_key'],
+                    'key' => $this->sell['key'],
                     'user_id' => $this->sell['user'],
                     'asset_id' => $asset->id,
                     'type' => 'SELL',
@@ -69,11 +68,9 @@ class SellJob implements ShouldQueue
                 $wallet->update([
                     'locked_balance' => bcadd((string) $wallet->locked_balance, $amount, 18),
                 ]);
-                DB::commit();
             });
 
         } catch (Exception $e) {
-            DB::rollBack();
             $errorID = now()->format('YmdHis').rand(1000, 9999);
             Log::error("Sell order failed: $errorID ".$e->getMessage());
         }

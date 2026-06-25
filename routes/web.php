@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\Admin\Auth\LoginController;
+use App\Http\Controllers\Admin\HomeController;
+use App\Http\Controllers\Admin\UsersController;
 use App\Http\Controllers\Payment\PaymentController;
 use App\Http\Controllers\Payment\SellController;
 use App\Http\Middleware\Buy\EnsureUserHasPaymentProfile;
@@ -44,6 +47,14 @@ Route::prefix('dashboard')->middleware(['auth', 'verified', EnsureEmailIsVerifie
         ->middleware('throttle:10,1')
         ->name('dashboard.setting.password');
 
+});
+
+Route::prefix('/admin/pages')->group(function () {
+    Route::get('/login', [LoginController::class, 'index'])->name('admin.auth.index');
+    Route::post('/login', [LoginController::class, 'login'])->name('admin.auth.login');
+    Route::post('/logout', [LoginController::class, 'logout'])->name('admin.auth.logout');
+    Route::get('/home', [HomeController::class, 'index'])->name('admin.home');
+    Route::resource('/users', UsersController::class);
 });
 
 Route::view('profile', 'profile')->middleware(['auth'])->name('profile');

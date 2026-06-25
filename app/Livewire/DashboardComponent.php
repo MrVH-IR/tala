@@ -20,7 +20,10 @@ class DashboardComponent extends Component
         $user = Auth::user();
 
         if (! session('welcome-notification')) {
-            $this->dispatch('app-notification', 'خوش آمدید');
+            $this->dispatch('notification', [
+                'type' => 'success',
+                'message' => 'خوش آمدید',
+            ]);
             session()->put('welcome-notification', true);
         }
 

@@ -20,6 +20,7 @@ class Order extends Model
         'idempotency_key',
         'confirmed_by',
         'confirmed_at',
+        'key',
     ];
 
     protected function casts(): array

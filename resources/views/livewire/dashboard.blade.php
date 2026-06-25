@@ -96,6 +96,8 @@
                 <th class="p-3">نوع</th>
                 <th class="p-3">دارایی</th>
                 <th class="p-3">مقدار</th>
+                <th class="p-3">دارایی قبل تراکنش</th>
+                <th class="p-3">دارایی بعد تراکنش</th>
                 <th class="p-3">تاریخ</th>
             </tr>
             </thead>
@@ -120,6 +122,15 @@
                     <td class="p-3 font-mono">
                         {{ number_format($tx->amount, 4) }}
                     </td>
+
+                    <td class="p-3 font-mono">
+                        {{ number_format($tx->balance_before) }}
+                    </td>
+
+                    <td class="p-3 font-mono">
+                        {{ number_format($tx->balance_after) }}
+                    </td>
+
 
                     <td class="p-3 text-xs text-gray-500">
                         {{ $tx->created_at->format('Y/m/d') }}

@@ -4,8 +4,7 @@ namespace App\Http\Controllers\Payment;
 
 use App\Http\Controllers\Controller;
 use App\Jobs\Order\SellJob;
-use App\Models\Accounter\Asset;
-use App\Models\Accounter\Wallet;
+use App\Sell\Validation;
 use Exception;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -15,6 +14,8 @@ use Symfony\Component\HttpKernel\Exception\HttpException;
 
 class SellController extends Controller
 {
+    use Validation;
+
     public function requestSell(Request $request): RedirectResponse
     {
         try {
@@ -25,32 +26,18 @@ class SellController extends Controller
                         'message' => 'شما درخواستی برای فروش ثبت نکرده اید.',
                         'type' => 'error']]);
             }
-            $checks = [
-                'symbol' => [
-                    'status' => Asset::where('symbol', $sale['symbol'])
-                        ->first()
-                        ->exists(),
-                    'message' => 'دارایی مورد نظر پیدا نشد.',
-                ],
-                'amount' => [
-                    'status' => Wallet::where('user_id', $sale['user'])
-                        ->where('balance', '>=', $sale['amount'])
-                        ->where('locked_balance', '=<', $sale['amount'])
-                        ->first()
-                        ->exists(),
-                    'message' => 'موجودی کیف پول برای فروش کافی نیست.',
-                ],
-            ];
-            foreach ($checks as $check) {
-                if (! $check['status']) {
-                    return redirect()
-                        ->route('dashboard.payment.sell')
-                        ->with(['notification' => [
-                            'message' => $check['message'],
-                            'type' => 'error']]);
-                }
+
+            $error = $this->validateSell($sale);
+
+            if ($error) {
+                return redirect()
+                    ->route('dashboard')
+                    ->with(['notification' => [
+                        'message' => $error,
+                        'type' => 'error']]);
             }
-            $sale['idempotency_key'] = Str::uuid()->toString();
+
+            $sale['key'] = Str::uuid()->toString();
             SellJob::dispatch($sale)->onQueue('default')->delay(now()->addSeconds(5));
 
             return redirect()
@@ -77,8 +64,6 @@ class SellController extends Controller
                     'message' => 'مشکلی در ثبت فروش پیش آمده است '.$errorID,
                     'type' => 'error',
                 ]]);
-        } finally {
-            session()->forget('sale');
         }
     }
 }

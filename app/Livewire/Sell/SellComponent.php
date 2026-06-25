@@ -147,6 +147,7 @@ class SellComponent extends Component
             'price' => $this->selectedPrice,
             'total' => $this->total,
             'user' => $user_id,
+            'asset_id' => $asset->id,
             'wallet' => $walletSnapshot,
         ]);
 
