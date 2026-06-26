@@ -10,7 +10,7 @@ class DatabaseSeeder extends Seeder
 {
     public function run(): void
     {
-        Admin::factory(5)->create();
+        Admin::factory(1)->create();
         User::factory(5)->create();
 
         $this->call([

@@ -78,7 +78,7 @@
 
                 <li>
                     <a
-                        href="#"
+                        href="{{ route('admin.assets.request.buy') }}"
                         class="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-100"
                     >
                         <i class="fa-solid fa-money-bill"></i>

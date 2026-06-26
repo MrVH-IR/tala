@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\AssetController;
 use App\Http\Controllers\Admin\Auth\LoginController;
 use App\Http\Controllers\Admin\ContactController;
 use App\Http\Controllers\Admin\HomeController;
+use App\Http\Controllers\Admin\RequestBuyAsset;
 use App\Http\Controllers\Admin\UsersController;
 use App\Http\Controllers\Payment\PaymentController;
 use App\Http\Controllers\Payment\SellController;
@@ -32,11 +33,11 @@ Route::get('/contact', ContactForm::class)->name('contact');
 Route::prefix('dashboard')->middleware(['auth', 'verified', EnsureEmailIsVerified::class])->group(function () {
     Route::get('/', DashboardComponent::class)->name('dashboard');
     Route::get('/buy', BuyComponent::class)->middleware(EnsureUserHasPaymentProfile::class)->name('dashboard.buy');
-    Route::get('/sell', SellComponent::class)->name('dashboard.sell');
+    Route::get('/sell', SellComponent::class)->middleware(EnsureUserHasPaymentProfile::class)->name('dashboard.sell');
     //    Route::get('/payment/order', [PaymentController::class, 'pay'])->name('payment.order');
     //    Route::get('/payment/callback', [PaymentController::class, 'callback'])->name('dashboard.payment.callback');
-    Route::get('/payment/order', [PaymentController::class, 'requestAsset'])->name('dashboard.payment.requestAsset');
-    Route::get('/payment/sell', [SellController::class, 'requestSell'])->name('dashboard.payment.sell');
+    Route::get('/payment/order', [PaymentController::class, 'requestAsset'])->middleware(EnsureUserHasPaymentProfile::class)->name('dashboard.payment.requestAsset');
+    Route::get('/payment/sell', [SellController::class, 'requestSell'])->middleware(EnsureUserHasPaymentProfile::class)->name('dashboard.payment.sell');
     Route::get('/setting', function () {
         return view('livewire.settings.index');
     })->name('dashboard.setting');
@@ -45,9 +46,9 @@ Route::prefix('dashboard')->middleware(['auth', 'verified', EnsureEmailIsVerifie
         ->middleware('throttle:10,1')
         ->name('dashboard.setting.profile');
 
-    Volt::route('/setting/password', 'pages.settings.password')
-        ->middleware('throttle:10,1')
-        ->name('dashboard.setting.password');
+    //    Volt::route('/setting/password', 'pages.settings.password')
+    //        ->middleware('throttle:10,1')
+    //        ->name('dashboard.setting.password');
 
 });
 
@@ -59,6 +60,8 @@ Route::prefix('/admin/pages')->group(function () {
     Route::resource('/users', UsersController::class);
     Route::get('/assets', [AssetController::class, 'index'])->name('admin.assets.index');
     Route::get('/assets/search', [AssetController::class, 'search'])->name('admin.assets.search');
+    Route::get('/assets/request/buy', [RequestBuyAsset::class, 'index'])->name('admin.assets.request.buy');
+    Route::post('/assets/request/buy/{order}', [RequestBuyAsset::class, 'changeStatus'])->name('admin.assets.request.status');
     Route::get('/contact', [ContactController::class, 'index'])->name('admin.contact.index');
 });
 

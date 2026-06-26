@@ -141,7 +141,6 @@ class PaymentController extends Controller
 
     /**
      * @return RedirectResponse
-     * @param Request $request
      */
     #[Deprecated(reason: 'This app uses a Request - Admin approve system. Not a payment gateway', since: '8.4')]
     public function callback(Request $request)
@@ -206,8 +205,8 @@ class PaymentController extends Controller
 
     /**
      * @return RedirectResponse
+     *
      * @throws Throwable
-     * @param Request $request
      */
     public function requestAsset(Request $request)
     {
@@ -254,6 +253,7 @@ class PaymentController extends Controller
             NewOrderJob::dispatch($user, $order)->onQueue('default')->delay(now()->addSeconds(2));
 
             session()->forget('purchase');
+
             return redirect()
                 ->route('dashboard')
                 ->with([

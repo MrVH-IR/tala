@@ -8,6 +8,7 @@ use App\Models\Admin\Admin;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\RateLimiter;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Str;
 
 class LoginController extends Controller
@@ -54,8 +55,9 @@ class LoginController extends Controller
 
     public function logout()
     {
-        Auth::logout();
-        session()->invalidate();
+        Auth::guard('admin')->logout();
+        Session::invalidate();
+        Session::regenerateToken();
         return redirect()->route('admin.auth.login');
     }
 }

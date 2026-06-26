@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Relations\HasOneThrough;
 class WalletTransaction extends Model
 {
     protected $fillable = [
+        'order_id',
         'wallet_id',
         'type',
         'amount',
@@ -33,5 +34,10 @@ class WalletTransaction extends Model
             'wallet_id', // wallet_transactions.wallet_id
             'user_id'    // wallets.user_id
         );
+    }
+
+    public function order(): BelongsTo
+    {
+        return $this->belongsTo(Order::class);
     }
 }

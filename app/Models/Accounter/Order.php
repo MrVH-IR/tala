@@ -6,6 +6,7 @@ use App\Models\Admin\Admin;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Order extends Model
 {
@@ -43,5 +44,10 @@ class Order extends Model
     public function confirmedBy(): BelongsTo
     {
         return $this->belongsTo(Admin::class, 'confirmed_by');
+    }
+
+    public function walletTransactions(): HasMany
+    {
+        return $this->hasMany(WalletTransaction::class);
     }
 }

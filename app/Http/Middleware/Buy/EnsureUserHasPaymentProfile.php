@@ -24,7 +24,7 @@ class EnsureUserHasPaymentProfile
             ! $card?->card_number
         ) {
             return redirect()
-                ->route('profile')
+                ->route('dashboard.setting.profile')
                 ->with('error', 'برای خرید باید اطلاعات کاربری خود را تکمیل کنید');
         }
 

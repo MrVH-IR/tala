@@ -89,6 +89,7 @@ class TransactionSeeder extends Seeder
                 $wallet->increment('balance', $order->amount);
 
                 WalletTransaction::create([
+                    'order_id' => $order->id,
                     'wallet_id' => $wallet->id,
                     'type' => 'CREDIT',
                     'amount' => $order->amount,
@@ -104,6 +105,7 @@ class TransactionSeeder extends Seeder
                 $wallet->decrement('balance', $order->amount);
 
                 WalletTransaction::create([
+                    'order_id' => $order->id,
                     'wallet_id' => $wallet->id,
                     'type' => 'DEBIT',
                     'amount' => $order->amount,

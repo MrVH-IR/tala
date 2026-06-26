@@ -50,13 +50,21 @@
                     </x-nav-link-a>
                 </li>
                 <li>
-                    <x-nav-link-a :href="route('dashboard.setting.password')" :active="request()->routeIs('dashboard.setting.password')" class="flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium transition-all group">
+                    <x-nav-link-a :href="route('profile')" :active="request()->routeIs('profile')" class="flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium transition-all group">
                         <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-gray-400 group-hover:text-yellow-500 transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v-2H4a1 1 0 01-1-1v-4a1 1 0 011-1h3" />
                         </svg>
-                        <span>رمز عبور</span>
+                        <span>تنظیمات</span>
                     </x-nav-link-a>
                 </li>
+{{--                <li>--}}
+{{--                    <x-nav-link-a :href="route('dashboard.setting.password')" :active="request()->routeIs('dashboard.setting.password')" class="flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium transition-all group">--}}
+{{--                        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-gray-400 group-hover:text-yellow-500 transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor">--}}
+{{--                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v-2H4a1 1 0 01-1-1v-4a1 1 0 011-1h3" />--}}
+{{--                        </svg>--}}
+{{--                        <span>رمز عبور</span>--}}
+{{--                    </x-nav-link-a>--}}
+{{--                </li>--}}
             </ul>
         </div>
     </div>
