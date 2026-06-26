@@ -1,13 +1,7 @@
 @extends('admin.layouts.app')
 
-
-@section('header')
-    @include('admin.layouts.navbar')
-@endsection
-
 @section('content')
     <div class="p-6 space-y-8">
-        @include('admin.layouts.sidebar')
         {{-- ORDERS CHART --}}
         <div class="bg-white rounded-xl shadow p-6">
             <h2 class="text-lg font-bold mb-4">Orders (Buy / Sell)</h2>
@@ -23,8 +17,6 @@
         </div>
 
     </div>
-
-
 @endsection
 
 @section('footer')

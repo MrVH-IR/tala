@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\Admin\AssetController;
 use App\Http\Controllers\Admin\Auth\LoginController;
+use App\Http\Controllers\Admin\ContactController;
 use App\Http\Controllers\Admin\HomeController;
 use App\Http\Controllers\Admin\UsersController;
 use App\Http\Controllers\Payment\PaymentController;
@@ -55,6 +57,9 @@ Route::prefix('/admin/pages')->group(function () {
     Route::post('/logout', [LoginController::class, 'logout'])->name('admin.auth.logout');
     Route::get('/home', [HomeController::class, 'index'])->name('admin.home');
     Route::resource('/users', UsersController::class);
+    Route::get('/assets', [AssetController::class, 'index'])->name('admin.assets.index');
+    Route::get('/assets/search', [AssetController::class, 'search'])->name('admin.assets.search');
+    Route::get('/contact', [ContactController::class, 'index'])->name('admin.contact.index');
 });
 
 Route::view('profile', 'profile')->middleware(['auth'])->name('profile');

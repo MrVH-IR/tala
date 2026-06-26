@@ -1,4 +1,21 @@
-<div x-data="{ open: true }" class="relative">
+<div
+    x-data="{
+        open: true,
+
+        init() {
+            const saved = localStorage.getItem('admin-sidebar');
+
+            if (saved !== null) {
+                this.open = JSON.parse(saved);
+            }
+
+            this.$watch('open', value => {
+                localStorage.setItem('admin-sidebar', JSON.stringify(value));
+            });
+        }
+    }"
+    class="relative"
+>
 
     <button
         @click="open = !open"
@@ -51,11 +68,21 @@
 
                 <li>
                     <a
-                        href="#"
+                        href="{{ route('admin.assets.index') }}"
                         class="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-100"
                     >
                         <i class="fa-solid fa-coins"></i>
                         <span>دارایی‌ها</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a
+                        href="#"
+                        class="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-100"
+                    >
+                        <i class="fa-solid fa-money-bill"></i>
+                        <span>درخواست های خرید دارایی</span>
                     </a>
                 </li>
 
@@ -75,7 +102,17 @@
                         class="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-100"
                     >
                         <i class="fa-solid fa-sack-dollar"></i>
-                        <span>درخواست های خرید دارایی</span>
+                        <span>دارایی های کاربران</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a
+                        href="{{ route('admin.contact.index') }}"
+                        class="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-100"
+                    >
+                        <i class="fa-solid fa-envelope"></i>
+                        <span>پیام های کاربران</span>
                     </a>
                 </li>
 

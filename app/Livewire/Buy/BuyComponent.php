@@ -45,7 +45,11 @@ class BuyComponent extends Component
     public function mount(GoldApi $goldApi)
     {
         if (session()->has('error')) {
-            $this->dispatch('app-notification', 'مشکلی پیش آمده است');
+            $this->dispatch('notification', [
+                'type' => 'error',
+                'message' => 'مشکلی پش آمده است',
+            ]);
+            session()->forget('error');
         }
         $this->loadItems($goldApi);
     }

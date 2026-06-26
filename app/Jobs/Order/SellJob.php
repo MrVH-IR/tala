@@ -23,7 +23,7 @@ class SellJob implements ShouldQueue
 
     /**
      * Execute the job.
-     *
+     * @throws Exception
      * @throws Throwable
      */
     public function handle(): void
@@ -68,9 +68,9 @@ class SellJob implements ShouldQueue
                 $wallet->update([
                     'locked_balance' => bcadd((string) $wallet->locked_balance, $amount, 18),
                 ]);
-            });
+            }, 3);
 
-        } catch (Exception $e) {
+        } catch (Exception|Throwable $e) {
             $errorID = now()->format('YmdHis').rand(1000, 9999);
             Log::error("Sell order failed: $errorID ".$e->getMessage());
         }

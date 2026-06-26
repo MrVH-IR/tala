@@ -55,7 +55,7 @@ class LoginController extends Controller
     public function logout()
     {
         Auth::logout();
-
+        session()->invalidate();
         return redirect()->route('admin.auth.login');
     }
 }

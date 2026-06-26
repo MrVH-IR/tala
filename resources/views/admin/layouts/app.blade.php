@@ -13,10 +13,12 @@
 
     <body class="bg-slate-900">
         <header>
+            @include('admin.layouts.navbar')
             @yield('header')
         </header>
 
         <main>
+            @include('admin.layouts.sidebar')
             @yield('content')
         </main>
             @yield('footer')

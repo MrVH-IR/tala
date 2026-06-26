@@ -3,8 +3,9 @@
 namespace App\Livewire;
 
 use App\Models\ContactMessage;
-use Livewire\Component;
+use Illuminate\Support\Facades\RateLimiter;
 use Livewire\Attributes\Rule;
+use Livewire\Component;
 
 class ContactForm extends Component
 {
@@ -24,6 +25,23 @@ class ContactForm extends Component
 
     public function submit()
     {
+        $key = sprintf(
+            'contact-form:%s',
+            request()->ip()
+        );
+
+        RateLimiter::hit($key, 3600);
+
+        if (RateLimiter::tooManyAttempts($key, 2)) {
+            $seconds = RateLimiter::availableIn($key);
+            $this->dispatch('notification', [
+                'type' => 'error',
+                'message' => "تا {$seconds} ثانیه دیگر دوباره تلاش کنید.",
+            ]);
+
+            return;
+        }
+        RateLimiter::hit($key, 3600);
         $this->validate();
 
         ContactMessage::create([
