@@ -12,22 +12,10 @@ class HomeController extends Controller
 {
     public function index()
     {
-        $gold = $this->getGoldPrice();
-
         return view('admin.home', [
-            'gold' => $gold,
             'orderStats' => $this->chart(),
             'walletStats' => $this->walletChart(),
         ]);
-    }
-
-    public function getGoldPrice()
-    {
-        return Http::withHeaders([
-            'x-access-token' => config('services.admin_gold_api.key'),
-        ])->get(
-            'https://www.goldapi.io/api/XAU/USD/'
-        )->json();
     }
 
     public function chart()

@@ -19,10 +19,6 @@
     </div>
 @endsection
 
-@section('footer')
-    @include('admin.layouts.footer')
-@endsection
-
 @section('script')
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 

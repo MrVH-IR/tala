@@ -11,18 +11,19 @@
         @stack('styles')
     </head>
 
-    <body class="bg-slate-900">
+    <body class="min-h-screen flex flex-col bg-slate-900">
         <header>
-            @include('admin.layouts.navbar')
+{{--            @include('admin.layouts.navbar')--}}
             @yield('header')
         </header>
 
-        <main>
+        <main class="flex-1">
             @include('admin.layouts.sidebar')
             @yield('content')
         </main>
             @yield('footer')
-            <livewire:components.notification />
-            @yield('script')
+        <livewire:components.notification />
+        @include('admin.layouts.footer')
+        @yield('script')
     </body>
 </html>

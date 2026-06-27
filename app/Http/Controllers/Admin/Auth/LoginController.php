@@ -15,6 +15,9 @@ class LoginController extends Controller
 {
     public function index()
     {
+        if (Auth::guard('admin')->check()) {
+            return redirect()->route('admin.home');
+        }
         return view('admin.auth.login');
     }
 
@@ -56,6 +59,7 @@ class LoginController extends Controller
     public function logout()
     {
         Auth::guard('admin')->logout();
+        Auth::guard('web')->logout();
         Session::invalidate();
         Session::regenerateToken();
         return redirect()->route('admin.auth.login');

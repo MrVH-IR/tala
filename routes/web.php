@@ -1,10 +1,12 @@
 <?php
 
+use App\Classes\AdminGoldApi;
 use App\Http\Controllers\Admin\AssetController;
 use App\Http\Controllers\Admin\Auth\LoginController;
 use App\Http\Controllers\Admin\ContactController;
 use App\Http\Controllers\Admin\HomeController;
 use App\Http\Controllers\Admin\RequestBuyAsset;
+use App\Http\Controllers\Admin\SellAssetController;
 use App\Http\Controllers\Admin\UsersController;
 use App\Http\Controllers\Payment\PaymentController;
 use App\Http\Controllers\Payment\SellController;
@@ -62,13 +64,15 @@ Route::prefix('/admin/pages')->group(function () {
     Route::get('/assets/search', [AssetController::class, 'search'])->name('admin.assets.search');
     Route::get('/assets/request/buy', [RequestBuyAsset::class, 'index'])->name('admin.assets.request.buy');
     Route::post('/assets/request/buy/{order}', [RequestBuyAsset::class, 'changeStatus'])->name('admin.assets.request.status');
+    Route::get('/assets/sell', [SellAssetController::class, 'index'])->name('admin.assets.sell.index');
+    Route::get('/assets/sell/search', [SellAssetController::class, 'search'])->name('admin.assets.sell.search');
+    Route::post('/assets/sell/{order}', [SellAssetController::class, 'sellAsset'])->name('admin.assets.sell.status');
     Route::get('/contact', [ContactController::class, 'index'])->name('admin.contact.index');
 });
 
 Route::view('profile', 'profile')->middleware(['auth'])->name('profile');
 
 Route::fallback(function () {
-    return redirect()->route('home');
+    return abort(404);
 });
-
 require __DIR__.'/auth.php';

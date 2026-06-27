@@ -8,6 +8,13 @@
                 <a href="{{ url('logout') }}" class="px-3 py-2 text-black transition rounded-md dark:text-white hover:text-black/70 dark:hover:text-white/80">
                     خروج
                 </a>
+            @elseif(Auth::guard('admin')->check())
+                <a href="{{ url('/admin/pages/home') }}" class="px-3 py-2 text-black transition rounded-md dark:text-white hover:text-black/70 dark:hover:text-white/80">
+                    پنل ادمین
+                </a>
+                <a href="{{ url('admin/pages/logout') }}" class="px-3 py-2 text-black transition rounded-md dark:text-white hover:text-black/70 dark:hover:text-white/80">
+                    خروج
+                </a>
             @else
                 <a href="{{ route('login') }}" class="px-3 py-2 text-black transition rounded-md dark:text-white hover:text-black/70 dark:hover:text-white/80">
                     ورود

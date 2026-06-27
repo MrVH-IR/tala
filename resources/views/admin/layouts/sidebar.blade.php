@@ -88,11 +88,21 @@
 
                 <li>
                     <a
-                        href="#"
+                        href="{{ route('admin.assets.sell.index') }}"
                         class="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-100"
                     >
                         <i class="fa-solid fa-dollar"></i>
                         <span>درخواست های فروش دارایی</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a
+                        href="#"
+                        class="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-100"
+                    >
+                        <i class="fa-solid fa-cash-app"></i>
+                        <span>کلیه درخواست ها</span>
                     </a>
                 </li>
 

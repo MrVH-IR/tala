@@ -45,9 +45,4 @@ class Order extends Model
     {
         return $this->belongsTo(Admin::class, 'confirmed_by');
     }
-
-    public function walletTransactions(): HasMany
-    {
-        return $this->hasMany(WalletTransaction::class);
-    }
 }
