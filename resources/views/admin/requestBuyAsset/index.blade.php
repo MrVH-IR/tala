@@ -143,7 +143,7 @@
                                         data-id="{{ $order->id }}"
                                     >
                                         @foreach($options as $option)
-                                            <option value="{{ $option }}" @if($order->status === $option) selected @endif>{{ $option }}</option>
+                                            <option value="{{ $option }}" @if($order->status->name === $option) selected @endif>{{ $option }}</option>
                                         @endforeach
                                     </select>
                                 </td>

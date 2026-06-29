@@ -1,16 +1,19 @@
 <?php
 
-use App\Classes\AdminGoldApi;
+use App\Http\Controllers\Admin\AllAssetController;
+use App\Http\Controllers\Admin\AllOrderController;
 use App\Http\Controllers\Admin\AssetController;
 use App\Http\Controllers\Admin\Auth\LoginController;
 use App\Http\Controllers\Admin\ContactController;
 use App\Http\Controllers\Admin\HomeController;
 use App\Http\Controllers\Admin\RequestBuyAsset;
 use App\Http\Controllers\Admin\SellAssetController;
+use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\UsersController;
 use App\Http\Controllers\Payment\PaymentController;
 use App\Http\Controllers\Payment\SellController;
 use App\Http\Middleware\Buy\EnsureUserHasPaymentProfile;
+use App\Http\Middleware\CheckRouteStatus;
 use App\Livewire\AboutPage;
 use App\Livewire\BlogPage;
 use App\Livewire\Buy\BuyComponent;
@@ -24,7 +27,6 @@ use Illuminate\Support\Facades\Route;
 use Livewire\Volt\Volt;
 
 Route::get('/', HomeComponent::class)->name('home');
-
 Route::get('/about', AboutPage::class)->name('about');
 Route::get('/resources', InfoPage::class)->name('resources');
 Route::get('/rules', InfoPage::class)->name('rules');
@@ -32,7 +34,7 @@ Route::get('/privacy', InfoPage::class)->name('privacy');
 Route::get('/blog', BlogPage::class)->name('blog');
 Route::get('/contact', ContactForm::class)->name('contact');
 
-Route::prefix('dashboard')->middleware(['auth', 'verified', EnsureEmailIsVerified::class])->group(function () {
+Route::prefix('dashboard')->middleware(['auth', 'verified', EnsureEmailIsVerified::class, CheckRouteStatus::class])->group(function () {
     Route::get('/', DashboardComponent::class)->name('dashboard');
     Route::get('/buy', BuyComponent::class)->middleware(EnsureUserHasPaymentProfile::class)->name('dashboard.buy');
     Route::get('/sell', SellComponent::class)->middleware(EnsureUserHasPaymentProfile::class)->name('dashboard.sell');
@@ -67,7 +69,13 @@ Route::prefix('/admin/pages')->group(function () {
     Route::get('/assets/sell', [SellAssetController::class, 'index'])->name('admin.assets.sell.index');
     Route::get('/assets/sell/search', [SellAssetController::class, 'search'])->name('admin.assets.sell.search');
     Route::post('/assets/sell/{order}', [SellAssetController::class, 'sellAsset'])->name('admin.assets.sell.status');
+    Route::get('/orders/all', [AllOrderController::class, 'index'])->name('admin.orders.all');
+    Route::get('/assets/all', [AllAssetController::class, 'index'])->name('admin.assets.all');
     Route::get('/contact', [ContactController::class, 'index'])->name('admin.contact.index');
+    Route::get('/setting', [SettingController::class, 'index'])->name('admin.setting.index');
+    Route::post('/setting', [SettingController::class, 'store'])->name('admin.setting.store');
+    Route::patch('/setting/{setting}', [SettingController::class, 'update'])->name('admin.setting.update');
+    Route::delete('/setting/{setting}', [SettingController::class, 'destroy'])->name('admin.setting.destroy');
 });
 
 Route::view('profile', 'profile')->middleware(['auth'])->name('profile');

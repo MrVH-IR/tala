@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Accounter\Order;
 use App\Models\Accounter\Wallet;
 use App\Models\Accounter\WalletTransaction;
+use App\Order\OrderStatusEnum;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -90,16 +91,17 @@ class RequestBuyAsset extends Controller
     /**
      * @throws Exception
      */
-    private function ensureValidTransition(string $current, string $next): void
+    private function ensureValidTransition(OrderStatusEnum $current, string $next): void
     {
         $allowedTransitions = [
-            'REQUESTED' => ['PAID', 'REJECTED', 'CANCELLED'],
-            'PAID' => ['COMPLETED'],
+            'REQUESTED' => ['PENDING', 'PAID', 'REJECTED', 'CANCELLED'],
+            'PENDING' => ['PAID', 'REJECTED', 'CANCELLED'],
+            'PAID' => ['COMPLETED', 'REJECTED', 'CANCELLED'],
         ];
-        $allowed = $allowedTransitions[$current] ?? [];
+        $allowed = $allowedTransitions[$current->value] ?? [];
 
         if (! in_array($next, $allowed, true)) {
-            throw new Exception("Invalid status transition: {$current} -> {$next}");
+            throw new Exception("Invalid status transition: {$current->value} -> {$next}");
         }
     }
 }

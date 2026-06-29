@@ -13,8 +13,9 @@ return new class extends Migration
     {
         Schema::create('settings', function (Blueprint $table) {
             $table->id();
-            $table->enum('status', ['ACTIVE', 'INACTIVE']);
-            $table->string('route');
+            $table->string('route')->unique();
+            $table->boolean('active')->default(true);
+            $table->string('title')->nullable();
             $table->timestamps();
         });
     }

@@ -8,7 +8,15 @@ class Setting extends Model
 {
 
     protected $fillable = [
-        'status',
+        'active',
         'route',
+        'title',
     ];
+
+    protected function casts()
+    {
+        return [
+            'active' => 'boolean',
+        ];
+    }
 }

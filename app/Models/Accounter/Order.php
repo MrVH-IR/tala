@@ -4,6 +4,7 @@ namespace App\Models\Accounter;
 
 use App\Models\Admin\Admin;
 use App\Models\User;
+use App\Order\OrderStatusEnum;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -28,6 +29,7 @@ class Order extends Model
     {
         return [
             'confirmed_at' => 'datetime',
+            'status' => OrderStatusEnum::class,
         ];
     }
 

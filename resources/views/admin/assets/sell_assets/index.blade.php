@@ -163,7 +163,7 @@
                                     data-id="{{ $asset->id }}"
                                 >
                                     @foreach($options as $option)
-                                        <option value="{{ $option }}" @if($asset->status === $option) selected @endif>{{ $option }}</option>
+                                        <option value="{{ $option }}" @if($asset->status->value === $option) selected @endif>{{ $option }}</option>
                                     @endforeach
                                 </select>
                             </td>
@@ -414,8 +414,10 @@
                 );
 
                 const data = await response.json();
-
-                if (data.status === 'success') {
+                console.log('success =', data.success);
+                console.log('typeof =', typeof data.success);
+                console.log(data);
+                if (data.success === true) {
 
                     currentSelect.dataset.current = currentSelect.value;
 

@@ -151,7 +151,7 @@ class SellComponent extends Component
             'wallet' => $walletSnapshot,
         ]);
 
-        $this->dispatch('app-notification', 'درخواست فروش شما با موفقیت ثبت شد.');
+        $this->dispatch('notification', 'درخواست فروش شما با موفقیت ثبت شد.');
 
         $this->reset([
             'selectedSymbol',

@@ -98,7 +98,7 @@
 
                 <li>
                     <a
-                        href="#"
+                        href="{{ route('admin.orders.all') }}"
                         class="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-100"
                     >
                         <i class="fa-solid fa-cash-app"></i>
@@ -108,7 +108,7 @@
 
                 <li>
                     <a
-                        href="#"
+                        href="{{ route('admin.assets.all') }}"
                         class="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-100"
                     >
                         <i class="fa-solid fa-sack-dollar"></i>
@@ -128,7 +128,7 @@
 
                 <li>
                     <a
-                        href="#"
+                        href="{{ route('admin.setting.index') }}"
                         class="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-100"
                     >
                         <i class="fa-solid fa-gear"></i>

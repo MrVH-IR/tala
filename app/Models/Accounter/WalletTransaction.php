@@ -3,6 +3,7 @@
 namespace App\Models\Accounter;
 
 use App\Models\User;
+use App\Order\OrderEnum;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOneThrough;
@@ -18,6 +19,13 @@ class WalletTransaction extends Model
         'balance_after',
         'description',
     ];
+
+    protected function casts()
+    {
+        return [
+            'type' => OrderEnum::class
+            ];
+    }
 
     public function wallet(): BelongsTo
     {
