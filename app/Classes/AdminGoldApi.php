@@ -7,6 +7,7 @@ use Illuminate\Http\Client\ConnectionException;
 use Illuminate\Http\Client\RequestException;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Log;
 
 class AdminGoldApi
 {
@@ -38,14 +39,13 @@ class AdminGoldApi
                 'Platinum' => 'XPT',
             ];
 
-            $gold = [];
-
-            foreach ($symbols as $name => $symbol) {
-                $gold[$name] = Http::acceptJson()
+            $gold = array_map(function ($symbol) {
+                return Http::acceptJson()
                     ->get("https://api.gold-api.com/price/{$symbol}/".self::CURRENCY)
                     ->throw()
                     ->json();
-            }
+            }, $symbols);
+            Log::info('Symbols API Response: '.json_encode($gold));
 
             return $gold;
         });

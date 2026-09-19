@@ -23,7 +23,7 @@ class GoldApi
                     ]);
 
                     $response = $client->get(
-                        'https://brsapi.ir/Api/Market/Gold_Currency.php',
+                        'https://api.brsapi.ir/Api/Market/Gold_Currency.php',
                         [
                             'query' => [
                                 'key' => config('services.bprsapi.key'),

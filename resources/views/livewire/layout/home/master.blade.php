@@ -39,6 +39,7 @@
 
             </div>
         </div>
+        @yield('script')
         <script src="{{ asset('js/darkmode.js') }}"></script>
     </body>
 </html>

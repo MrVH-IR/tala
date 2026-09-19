@@ -28,7 +28,7 @@
         </nav>
 
         <div>
-            <a href="#">
+            <a href="{{ route('home') }}">
             <img id="logo" class="max-w-[50px]" src="{{ asset('images/logos/nobg-g-logo.png') }}" alt="Goldina Logo"/>
             </a>
         </div>

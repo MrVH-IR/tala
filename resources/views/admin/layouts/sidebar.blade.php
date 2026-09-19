@@ -1,3 +1,4 @@
+@if(Auth::guard('admin')->check())
 <div
     x-data="{
         open: true,
@@ -165,3 +166,4 @@
     </main>
 
 </div>
+@endif
