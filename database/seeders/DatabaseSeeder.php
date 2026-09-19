@@ -17,6 +17,7 @@ class DatabaseSeeder extends Seeder
             AssetSeeder::class,
             PostSeeder::class,
             TransactionSeeder::class,
+            ContactSeeder::class
         ]);
     }
 }
